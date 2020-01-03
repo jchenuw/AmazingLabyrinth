@@ -1,4 +1,9 @@
 public class Game {
-    private Integer numPlayers;
+
+    // Game board
+    Board board;
+
+    // Game players
+    private int numPlayers;
     private Player[] players;
 }

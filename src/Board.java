@@ -1,19 +1,27 @@
 public class Board {
 
-  private Tile[] tiles;
-  private Player[] players;
-  private Tile extraTile;
+	// Board tiles
+	private Tile[][] tiles;
 
-  public Tile shiftRowLeft(Integer row) {
-    // TODO: complete this function.
-  }
-  public Tile shiftRowRight(Integer row) {
-    // TODO: complete this function.
-  }
-  public Tile shiftColUp(Integer col) {
-    // TODO: complete this function.
-  }
-  public Tile shiftRowDown(Integer col) {
-    // TODO: complete this function.
-  }
+	// Players
+	private Player[] players;
+
+	// Insertable tile
+	private Tile extraTile;
+
+	public void shiftRowLeft(Integer row) {
+		// TODO: complete this function.
+	}
+
+	public void shiftRowRight(Integer row) {
+		// TODO: complete this function.
+	}
+
+	public void shiftColUp(Integer col) {
+		// TODO: complete this function.
+	}
+
+	public void shiftRowDown(Integer col) {
+		// TODO: complete this function.
+	}
 }
