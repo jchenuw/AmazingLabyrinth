@@ -7,10 +7,13 @@ public class Menu extends JFrame implements ActionListener {
     JButton[] b = new JButton[3];
 
     Menu() {
-        JLabel title = new JLabel("Test");
+        // setup title
+        JLabel title = new JLabel("Menu");
         title.setBounds(640, 50, 70, 70);
         title.setVisible(true);
+        add(title);
 
+        // setup Menu buttons
         for (int i = 0; i < 3; i++) {
             b[i] = new JButton();
             b[i].setBounds(640, 170 + (i * 100), 100, 50);
@@ -23,27 +26,32 @@ public class Menu extends JFrame implements ActionListener {
         b[1].setText("Settings");
         b[2].setText("Exit");
 
-        add(title);
-
+        // setup Menu
+        setTitle("Menu");
         setSize(1280, 720);
         setLayout(null);
         setVisible(true);
     }
 
+    // Action performed for buttons
     @Override
     public void actionPerformed(ActionEvent e) {
+        // if start button is pressed start game
         if (e.getSource() == b[0]) {
             System.out.println("Start Pressed");
+            GameDisplay GameDisplay = new GameDisplay();
+            dispose();
         }
 
+        // if settings is pressed
         if (e.getSource() == b[1]) {
             System.out.println("Settings Pressed");
         }
 
+        // if exit is pressed exit
         if (e.getSource() == b[2]) {
             System.out.println("Exit Pressed");
             dispose();
         }
-
     }
 }
