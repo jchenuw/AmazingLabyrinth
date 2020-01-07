@@ -1,5 +1,6 @@
 public class HumanPlayer extends Player {
-    public HumanPlayer(int row, int col){
-        super(row, col);
-    }
+
+	public HumanPlayer(int row, int col, String colour) {
+		super(row, col, colour);
+	}
 }

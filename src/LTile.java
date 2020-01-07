@@ -8,6 +8,13 @@ public class LTile extends Tile{
 			{true, false, false, true}
 	};
 
+	/**
+	 * Creates new L-tile based on row position, column position, and orientation
+	 *
+	 * @param row row position on the board
+	 * @param col column position on the board
+	 * @param orientation orientation of the tile
+	 */
 	public LTile(int row, int col, int orientation) {
 		super(row, col, orientation);
 

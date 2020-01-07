@@ -5,7 +5,6 @@ public class BoardDisplay extends JPanel{
 
 	// Underlying board model
 	private Board board;
-	private BoardDisplay JPanel;
 
 	private GridLayout GridLayout = new GridLayout(7,7);
 

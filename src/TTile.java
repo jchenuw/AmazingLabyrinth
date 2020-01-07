@@ -8,7 +8,13 @@ public class TTile extends Tile {
 			{true, false, true, true}
 	};
 
-	// Constructor
+	/**
+	 * Creates new T-tile based on row position, column position, and orientation
+	 *
+	 * @param row row position on the board
+	 * @param col column position on the board
+	 * @param orientation orientation of the tile
+	 */
 	public TTile(int row, int col, int orientation) {
 		super(row, col, orientation);
 

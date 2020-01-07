@@ -5,6 +5,6 @@ public class Launcher {
         // Menu labyrinthMenu = new Menu();
 
         // Testing the game
-        Game labyrinthGame = new Game();
+        Game labyrinthGame = new Game(4);
     }
 }

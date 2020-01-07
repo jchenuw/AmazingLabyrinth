@@ -7,8 +7,10 @@ public abstract class Player extends Piece {
 	private Card currentCard;
 
 	// Constructor
-	public Player(int row, int col) {
+	public Player(int row, int col, String colour) {
 		super(row, col);
+
+		this.colour = colour;
 	}
 
 	public void moveTo(int row, int col) {

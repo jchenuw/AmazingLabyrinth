@@ -2,13 +2,8 @@ import java.util.ArrayList;
 
 public abstract class Tile extends Piece {
 
-	// Treasure on the tile
 	private Treasure treasure;
-
-	// Neighbouring tiles
 	private ArrayList<Tile> adjTiles;
-
-	// Type of tile
 	private char type;
 
 	// Openings of the tile
@@ -93,9 +88,7 @@ public abstract class Tile extends Piece {
 	 */
 	public abstract void updateOpenings();
 
-	/**
-	 *	Setters and getters
-	 */
+	// Setters and getters
 	public void setType(char type) {
 		this.type = type;
 	}
@@ -115,5 +108,12 @@ public abstract class Tile extends Piece {
 	}
 	public boolean isExtra() {
 		return this.extra;
+	}
+
+	// Object class toString
+	@Override
+	public String toString() {
+		return "Tile: row = " + getRow() + ", col = " + getCol() + ", type = " + type + ", orientation = " + (orientation * 90) + " degrees, " + "has treasure = " + hasTreasure()
+				+ ", openings: " + openings[0] + " " + openings[1] + " " + openings[2] + " " + openings[3];
 	}
 }

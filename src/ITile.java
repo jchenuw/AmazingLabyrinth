@@ -7,7 +7,13 @@ public class ITile extends Tile {
 			{false, true, false, true}
 	};
 
-	// Constructor
+	/**
+	 * Creates new I-tile based on row position, column position, and orientation
+	 *
+	 * @param row row position on the board
+	 * @param col column position on the board
+	 * @param orientation orientation of the tile
+	 */
 	public ITile(int row, int col, int orientation) {
 		super(row, col, orientation);
 

@@ -4,7 +4,12 @@ public abstract class Piece {
     private int row;
     private int col;
 
-    // Constructor
+	/**
+	 * Piece constructor
+	 *
+	 * @param row row position on the board
+	 * @param col column position on the board
+	 */
     public Piece(int row, int col) {
         // set positions
         this.row = row;
