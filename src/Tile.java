@@ -16,7 +16,7 @@ public abstract class Tile extends Piece {
 	// 1 - Right
 	// 2 - Down
 	// 3 - Left
-	private boolean openings[];
+	protected boolean openings[];
 
 	// Orientation of the tile
 	// 0 - 0 degree
@@ -28,30 +28,74 @@ public abstract class Tile extends Piece {
 	// Determines if tile is the extra
 	private boolean extra;
 
-	// Constructor
-	public Tile(int row, int col) {
+	/**
+	 * Creates new tile based on row position, column position, and orientation
+	 *
+	 * @param row row position on the board
+	 * @param col column position on the board
+	 * @param orientation orientation of the tile
+	 */
+	public Tile(int row, int col, int orientation) {
 		super(row, col);
+
+		this.orientation = orientation;
 	}
 
-	// Removes current treasure on tile
+	/**
+	 * Removes current treasure on tile
+ 	 */
 	public void removeTreasure() {
 		this.treasure = null;
 	}
 
-	// Determines if this tile contains a treasure
+	/**
+	 * Determines if this tile contains a treasure
+	 *
+	 * @return if the treasure is not null
+	 */
 	public boolean hasTreasure() {
 		return this.treasure != null;
 	}
 
-	// Add and remove neighbours
+	/**
+	 * Connects a tile to {@code adjTiles}
+	 *
+	 * @param tile Tile to be connected
+	 */
 	public void addAdjTile(Tile tile) {
 		adjTiles.add(tile);
 	}
+
+	/**
+	 * Removes all connected tiles in {@code adjTiles}
+	 */
 	public void removeAdjTiles() {
 		adjTiles.clear();
 	}
 
-	/* Setters and getters */
+	/**
+	 * Rotates current tile by 90 degrees (increment {@code orientation} by 1)
+	 * and returns {@code orientation} to 0 when rotating at 270 degrees
+	 */
+	public void rotate() {
+
+		// rotate 90 degrees
+		this.orientation++;
+
+		if(this.orientation >= 4) {
+			// start back at 'normal' rotation
+			this.orientation = 0;
+		}
+	}
+
+	/**
+	 * Sets tile openings based on tile type and orientation
+	 */
+	public abstract void updateOpenings();
+
+	/**
+	 *	Setters and getters
+	 */
 	public void setType(char type) {
 		this.type = type;
 	}

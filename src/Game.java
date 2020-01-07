@@ -1,9 +1,17 @@
+import java.util.ArrayList;
+
 public class Game {
 
     // Game board
-    Board board;
+    private Board board;
 
-    // Game players
-    private int numPlayers;
-    private Player[] players;
+    // Players of the game
+	private ArrayList<Player> players;
+	private int numPlayers;
+
+	// Constructor
+	public Game() {
+		// create new board
+		board = new Board();
+	}
 }

@@ -7,20 +7,20 @@ public abstract class Piece {
     // Constructor
     public Piece(int row, int col) {
         // set positions
-        setRow(row);
-        setCol(col);
+        this.row = row;
+        this.col = col;
     }
 
     // Getters and setters
     public int getRow() {
-        return row;
+        return this.row;
     }
     public void setRow(int row) {
         this.row = row;
     }
 
     public int getCol() {
-        return col;
+        return this.col;
     }
     public void setCol(int col) {
         this.col = col;
