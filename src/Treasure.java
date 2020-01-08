@@ -4,6 +4,7 @@ public class Treasure {
 
     private final int TREASURE_NUM;
     private boolean collected = false;
+    private Tile tileOwner;
 
 	/**
 	 * Treasure constructor
@@ -24,6 +25,13 @@ public class Treasure {
 	}
 	public boolean isCollected() {
 		return this.collected;
+	}
+
+	public void setTileOwner(Tile tileOwner) {
+		this.tileOwner = tileOwner;
+	}
+	public Tile getTileOwner() {
+		return this.tileOwner;
 	}
 
 }

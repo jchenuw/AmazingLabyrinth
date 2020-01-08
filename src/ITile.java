@@ -1,5 +1,8 @@
 public class ITile extends Tile {
 
+	// Non-stationary I-tiles amount
+	public static final int TILE_AMOUNT = 12;
+
 	private static boolean[][] openingsByOrientation = new boolean[][] {
 			{true, false, true, false},
 			{false, true, false, true},

@@ -1,7 +1,10 @@
 
 public class LTile extends Tile{
 
-	private static boolean[][] openingsByOrientation = new boolean[][] {
+	// Non-stationary L-tiles amount
+	public static final int TILE_AMOUNT = 16;
+
+	private static final boolean[][] openingsByOrientation = new boolean[][] {
 			{true, true, false, false},
 			{false, true, true, false},
 			{false, false, true, true},
