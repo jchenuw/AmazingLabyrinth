@@ -39,7 +39,7 @@ public class Game {
 		setupCardsAndTreasures();
 
 		// initialize new board
-		board = new Board(this.players);
+		board = new Board(this.players, this.treasures);
 	}
 
 	/**
@@ -72,9 +72,21 @@ public class Game {
 		}
 	}
 
-	// Setters and getters
+	// Getters
 	public Board getBoard() {
 		return this.board;
+	}
+
+	public Treasure[] getTreasure() {
+		return this.treasures;
+	}
+
+	public Card[] getCards() {
+		return this.cards;
+	}
+
+	public Tile getExtraTile() {
+		return this.extraTile;
 	}
 
 }

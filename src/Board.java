@@ -1,17 +1,28 @@
 public class Board {
 
+	// Board tiles setup
 	// Board tiles
 	// Goes from left to right, top to bottom.
 	private Tile[][] tiles;
 
-	// Players
+	// Players pieces
 	private Player[] players;
 
 	// Treasures
 	private Treasure[] treasures;
 
-	public Board(Player[] players) {
+	public Board(Player[] players, Treasure[] treasures) {
 		this.players = players;
+		this.treasures = treasures;
+		init();
+	}
+
+	public void init() {
+		setupTiles();
+	}
+
+	public void setupTiles() {
+
 	}
 
 	public void shiftRowLeft(int row, Tile extraTile) {
