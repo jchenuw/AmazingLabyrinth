@@ -1,5 +1,5 @@
 public class CPUPlayer extends Player {
-    public CPUPlayer(int row, int col){
-        super(row, col);
+    public CPUPlayer(int row, int col, String color){
+        super(row, col, color);
     }
 }
