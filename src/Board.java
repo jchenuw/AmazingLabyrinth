@@ -101,7 +101,7 @@ public class Board {
 
 		// Randomize shiftable tiles data
 		Collections.shuffle(shiftableTilesData, new Random());
-		//System.out.println(shiftableTilesData);
+		System.out.println(shiftableTilesData);
 
 		// Setup board tiles
 		// -------------------------------------------------------------
@@ -144,6 +144,8 @@ public class Board {
 					} else {
 						tiles[row][col] = new ITile(row, col, (rand.nextInt(4) + 1));
 					}
+
+					dataCounter++;
 
 					//add treasure
 					if(currentTreasureNum != -1) {
