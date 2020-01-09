@@ -25,6 +25,7 @@ public class GameDisplay extends JFrame {
 
 		// setup game frame
 		setTitle("GameDisplay");
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(1280, 720);
 		setLayout(null);
 		setVisible(true);

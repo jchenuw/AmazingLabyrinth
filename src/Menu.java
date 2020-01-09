@@ -28,6 +28,7 @@ public class Menu extends JFrame implements ActionListener {
 
         // setup Menu
         setTitle("Menu");
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(1280, 720);
         setLayout(null);
         setVisible(true);
