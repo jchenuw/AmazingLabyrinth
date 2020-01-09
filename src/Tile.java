@@ -11,7 +11,7 @@ public abstract class Tile extends Piece {
 	// 1 - Right
 	// 2 - Down
 	// 3 - Left
-	protected boolean openings[];
+	protected boolean[] openings;
 
 	// Orientation of the tile
 	// 1 - 0 degree
@@ -32,7 +32,7 @@ public abstract class Tile extends Piece {
 	 */
 	public Tile(int row, int col, int orientation) {
 		super(row, col);
-
+		openings = new boolean[4];
 		this.orientation = orientation;
 	}
 
@@ -89,6 +89,10 @@ public abstract class Tile extends Piece {
 	public abstract void updateOpenings();
 
 	// Setters and getters
+	public boolean getOpening(int dir){
+		return(openings[dir]);
+	}
+
 	public void setTreasure(Treasure treasure) {
 		this.treasure = treasure;
 	}

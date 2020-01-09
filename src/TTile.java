@@ -30,7 +30,7 @@ public class TTile extends Tile {
 	 */
 	@Override
 	public void updateOpenings() {
-		System.arraycopy(openingsByOrientation[this.getOrientation()], 0, openings, 0, 4);
+		System.arraycopy(openingsByOrientation[this.getOrientation() - 1], 0, openings, 0, 4);
 	}
 
 }
