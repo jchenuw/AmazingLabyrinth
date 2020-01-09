@@ -18,6 +18,9 @@ public class Game {
 	// Extra insertable tile
 	private Tile extraTile;
 
+	// load images
+	public static ImageLoader ImageLoader;
+
 	/**
 	 * Creates a new game that initializes a new board
 	 *
@@ -33,6 +36,7 @@ public class Game {
 	 * Initializes the game by setting up players and game pieces
 	 */
 	public void init() {
+		ImageLoader = new ImageLoader();
 
 		// setup pre-game components
 		setupPlayers();
@@ -70,6 +74,16 @@ public class Game {
 			treasures[i] = new Treasure(i);
 			cards[i] = new Card(treasures[i]);
 		}
+	}
+
+	/**
+	 * Checks if a player has won by checking if they have collected all the treasure
+	 *
+	 * @param player is The player to the checked
+	 * @return if the player has won
+	 */
+	public boolean isWinner(Player player){
+		return(player.isWon());
 	}
 
 	// Getters
