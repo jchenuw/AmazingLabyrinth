@@ -6,7 +6,7 @@ import javax.swing.*;
  *
  * @author Jier Chen
  */
-public class TileSlider extends JLabel {
+public class TileSlider extends JButton {
 
 	// Type of slider:
 	// 'R' - row slider
