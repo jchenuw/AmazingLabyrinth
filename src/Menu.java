@@ -40,7 +40,7 @@ public class Menu extends JFrame implements ActionListener {
         // if start button is pressed start game
         if (e.getSource() == b[0]) {
             System.out.println("Start Pressed");
-            GameDisplay GameDisplay = new GameDisplay();
+            new Game(4);
             dispose();
         }
 
