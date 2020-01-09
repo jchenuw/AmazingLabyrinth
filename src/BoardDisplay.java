@@ -10,7 +10,9 @@ public class BoardDisplay extends JPanel{
 
 	private TileDisplay[][] tiles = new TileDisplay[7][7];
 
-	public BoardDisplay() {
+	public BoardDisplay(Board board) {
+		this.board = board;
+
 		// setup board tiles
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; j < 7; j++){

@@ -5,6 +5,8 @@ public class Game {
     // Game board
     private Board board;
 
+    private GameDisplay gameDisplay;
+
     // Game cards to distribute to players
 	private Card[] cards;
 
@@ -41,6 +43,8 @@ public class Game {
 		// setup pre-game components
 		setupPlayers();
 		setupCardsAndTreasures();
+
+        gameDisplay = new GameDisplay(board);
 
 		// initialize new board
 		board = new Board(this.players, this.treasures);

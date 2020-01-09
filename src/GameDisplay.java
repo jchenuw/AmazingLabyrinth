@@ -10,10 +10,11 @@ public class GameDisplay extends JFrame {
 	private TileDisplay ExtraTileDisplay = new TileDisplay();
 
 	// The board
-	private BoardDisplay BoardDisplay = new BoardDisplay();
+	private BoardDisplay BoardDisplay;
 
-	public GameDisplay() {
+	public GameDisplay(Board board) {
 		// setup board
+		BoardDisplay = new BoardDisplay(board);
 		BoardDisplay.setLocation(200,50);
 		add(BoardDisplay);
 
