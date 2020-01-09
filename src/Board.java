@@ -26,6 +26,10 @@ public class Board {
 		public int getTreasureNum() {
 			return this.treasureNum;
 		}
+
+		public String toString(){
+			return String.valueOf(type);
+		}
 	}
 
 	// Stationary board tiles information
@@ -97,6 +101,7 @@ public class Board {
 
 		// Randomize shiftable tiles data
 		Collections.shuffle(shiftableTilesData, new Random());
+		//System.out.println(shiftableTilesData);
 
 		// Setup board tiles
 		// -------------------------------------------------------------
@@ -147,7 +152,62 @@ public class Board {
 				}
 			}
 		}
+		printBoard();
 	}
+
+	public void printBoard(){
+        for(int r = 0; r < tiles.length; r++) {
+            for (int c = 0; c < tiles[r].length; c++) {
+                System.out.print(tiles[r][c].getType(0) + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    /**
+     * Updates which tiles are next to and accessible from which tile
+     */
+	public void updateAdj(){
+        for(int r = 0; r < tiles.length; r++){
+            for(int c = 0; c < tiles[r].length; c++){
+                for(int dir = 0; dir < 4; dir++){
+                    if(!(r ==  0 && dir == 0) && !(r == 6 && dir == 2) && !(c == 0 && dir == 3) && !(c == 6 && dir == 1)){
+                        addAdj(r, c, dir);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * checks and adds adjacent tiles
+     *
+     * @param r row of the tile
+     * @param c column of the tile
+     * @param dir direction to be checked
+     */
+    public void addAdj(int r, int c, int dir){
+	    if(dir == 0){
+	        if(tiles[r][c].getOpening(0) && tiles[r - 1][c].getOpening(2)){
+	            tiles[r][c].addAdjTile(tiles[r - 1][c]);
+            }
+        }
+	    else if(dir == 1){
+            if(tiles[r][c].getOpening(1) && tiles[r][c + 1].getOpening(3)){
+                tiles[r][c].addAdjTile(tiles[r][c + 1]);
+            }
+        }
+        else if(dir == 2){
+            if(tiles[r][c].getOpening(2) && tiles[r + 1][c].getOpening(0)){
+                tiles[r][c].addAdjTile(tiles[r + 1][c]);
+            }
+        }
+        else{
+            if(tiles[r][c].getOpening(3) && tiles[r][c - 1].getOpening(1)){
+                tiles[r][c].addAdjTile(tiles[r][c + 1]);
+            }
+        }
+    }
 
 	public void shiftRowLeft(int row, Tile extraTile) {
 		Tile newExtraTile = tiles[row][0];
