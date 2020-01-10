@@ -14,10 +14,10 @@ public abstract class Tile extends Piece {
 	protected boolean[] openings;
 
 	// Orientation of the tile
-	// 1 - 0 degree
-	// 2 - 90 degrees
-	// 3 - 180 degrees
-	// 4 - 270 degrees
+	// 0 - 0 degree
+	// 1 - 90 degrees
+	// 2 - 180 degrees
+	// 3 - 270 degrees
 	private int orientation;
 
 	// Determines if tile is the extra
@@ -77,9 +77,9 @@ public abstract class Tile extends Piece {
 		// rotate 90 degrees
 		this.orientation++;
 
-		if(this.orientation > 4) {
+		if(this.orientation > 3) {
 			// start back at 'normal' rotation
-			this.orientation = 1;
+			this.orientation = 0;
 		}
 	}
 
@@ -121,7 +121,7 @@ public abstract class Tile extends Piece {
 	// Object class toString
 	@Override
 	public String toString() {
-		return "Tile: row = " + getRow() + ", col = " + getCol() + ", type = " + type + ", orientation = " + ((orientation - 1)* 90) + " degrees, " + "has treasure = " + hasTreasure()
+		return "Tile: row = " + getRow() + ", col = " + getCol() + ", type = " + type + ", orientation = " + (orientation * 90) + " degrees, " + "has treasure = " + hasTreasure()
 				+ ", openings: " + openings[0] + " " + openings[1] + " " + openings[2] + " " + openings[3];
 	}
 }

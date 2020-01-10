@@ -43,13 +43,13 @@ public class Board {
 			{'L',' ','T',' ','T',' ','L'}
 	};
 	private static final int[][] orientationOfStationaryTiles = new int[][] {
-			{1, 0, 3, 0, 3, 0, 3},
-			{0, 0, 0, 0, 0, 0, 0},
-			{2, 0, 2, 0, 3, 0, 4},
-			{0, 0, 0, 0, 0, 0, 0},
-			{2, 0, 1, 0, 4, 0, 4},
-			{0, 0, 0, 0, 0, 0, 0},
-			{2, 0, 1, 0, 1, 0, 4},
+			{'0',' ','2',' ','2',' ','2'},
+			{' ',' ',' ',' ',' ',' ',' '},
+			{'1',' ','1',' ','2',' ','3'},
+			{' ',' ',' ',' ',' ',' ',' '},
+			{'1',' ','0',' ','3',' ','3'},
+			{' ',' ',' ',' ',' ',' ',' '},
+			{'1',' ','0',' ','0',' ','3'},
 	};
 
 	// Board tiles
@@ -76,7 +76,7 @@ public class Board {
 
 		final int TOTAL_TILE_AMOUNT = TTile.TILE_AMOUNT + LTile.TILE_AMOUNT + ITile.TILE_AMOUNT;
 		final int MAX_SHIFTABLE_TREASURE = 6;
-		final int STATIONARY_TILE_AMOUNT = 16;
+		final int STATIONARY_TILE_AMOUNT = 12;
 		Random rand = new Random();
 
 		// Initial tile data generation
@@ -109,7 +109,7 @@ public class Board {
 		int dataCounter = 0;
 
 		for(int row = 0; row < tiles.length; row++) {
-			for(int col = 0; col < tiles.length; col++) {
+			for(int col = 0; col < tiles[row].length; col++) {
 
 				char tileType = typeOfStationaryTiles[row][col];
 
@@ -118,11 +118,11 @@ public class Board {
 
 					// create tile object
 					if(tileType == 'T') {
-						tiles[row][col] = new TTile(row, col, orientationOfStationaryTiles[row][col]);
+						tiles[row][col] = new TTile(row, col, (orientationOfStationaryTiles[row][col] - '0'));
 					} else if (tileType == 'L') {
-						tiles[row][col] = new LTile(row, col, orientationOfStationaryTiles[row][col]);
+						tiles[row][col] = new LTile(row, col, (orientationOfStationaryTiles[row][col] - '0'));
 					} else {
-						tiles[row][col] = new ITile(row, col, orientationOfStationaryTiles[row][col]);
+						tiles[row][col] = new ITile(row, col, (orientationOfStationaryTiles[row][col] - '0'));
 					}
 
 					// add treasure
@@ -138,11 +138,11 @@ public class Board {
 
 					// create tile object
 					if(tileType == 'T') {
-						tiles[row][col] = new TTile(row, col, (rand.nextInt(4) + 1));
+						tiles[row][col] = new TTile(row, col, (rand.nextInt(4)));
 					} else if (tileType == 'L') {
-						tiles[row][col] = new LTile(row, col, (rand.nextInt(4) + 1));
+						tiles[row][col] = new LTile(row, col, (rand.nextInt(4)));
 					} else {
-						tiles[row][col] = new ITile(row, col, (rand.nextInt(4) + 1));
+						tiles[row][col] = new ITile(row, col, (rand.nextInt(4)));
 					}
 
 					dataCounter++;
