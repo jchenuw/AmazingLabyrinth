@@ -5,8 +5,6 @@ public class Game {
     // Game board
     private Board board;
 
-    private GameDisplay gameDisplay;
-
     // Game cards to distribute to players
 	private Card[] cards;
 
@@ -19,9 +17,6 @@ public class Game {
 
 	// Extra insertable tile
 	private Tile extraTile;
-
-	// load images
-	public static ImageLoader ImageLoader;
 
 	/**
 	 * Creates a new game that initializes a new board
@@ -38,7 +33,6 @@ public class Game {
 	 * Initializes the game by setting up players and game pieces
 	 */
 	public void init() {
-		ImageLoader = new ImageLoader();
 
 		// setup pre-game components
 		setupPlayers();
@@ -47,7 +41,6 @@ public class Game {
 		// initialize new board
 		board = new Board(this.players, this.treasures);
 
-		gameDisplay = new GameDisplay(board);
 	}
 
 	/**
