@@ -229,29 +229,69 @@ public class Board {
 
 	public void shiftRowLeft(int row, Tile extraTile) {
 		Tile newExtraTile = tiles[row][0];
-		System.arraycopy(tiles[row], 1, tiles[row], 0, tiles[row].length - 1);
+		newExtraTile.setCol(-1);
+		newExtraTile.setRow(-1);
+		newExtraTile.setExtra(true);
+
+		for (int i = 0; i < tiles[row].length - 1; i++) {
+			tiles[row][i] = tiles[row][i + 1];
+		}
 		tiles[row][tiles.length - 1] = extraTile;
+		tiles[row][tiles.length - 1].setRow(row);
+		tiles[row][tiles.length - 1].setCol(tiles.length - 1);
+		tiles[row][tiles.length - 1].setExtra(false);
+
 		extraTile = newExtraTile;
 	}
 
 	public void shiftRowRight(int row, Tile extraTile) {
 		Tile newExtraTile = tiles[row][tiles.length - 1];
-		System.arraycopy(tiles[row], 0, tiles[row], 1, tiles[row].length - 1);
+		newExtraTile.setCol(-1);
+		newExtraTile.setRow(-1);
+		newExtraTile.setExtra(true);
+
+		for (int i = tiles[row].length - 1; i > 0; i--) {
+			tiles[row][i] = tiles[row][i - 1];
+		}
 		tiles[row][0] = extraTile;
+		tiles[row][0].setRow(row);
+		tiles[row][0].setCol(tiles.length - 1);
+		tiles[row][0].setExtra(false);
+
 		extraTile = newExtraTile;
 	}
 
 	public void shiftColUp(int col, Tile extraTile) {
 		Tile newExtraTile = tiles[0][col];
-		System.arraycopy(tiles, 1, tiles, 0,  tiles.length - 1);
+		newExtraTile.setCol(-1);
+		newExtraTile.setRow(-1);
+		newExtraTile.setExtra(true);
+
+		for (int i = 0; i < tiles.length - 1; i++) {
+			tiles[i][col] = tiles[i + 1][col];
+		}
 		tiles[tiles.length - 1][col] = extraTile;
+		tiles[tiles.length - 1][col].setRow(tiles.length - 1);
+		tiles[tiles.length - 1][col].setCol(col);
+		tiles[tiles.length - 1][col].setExtra(false);
+
 		extraTile = newExtraTile;
 	}
 
 	public void shiftRowDown(int col, Tile extraTile) {
 		Tile newExtraTile = tiles[tiles.length - 1][col];
-		System.arraycopy(tiles, 0, tiles, 1,  tiles.length - 1);
+		newExtraTile.setCol(-1);
+		newExtraTile.setRow(-1);
+		newExtraTile.setExtra(true);
+
+		for (int i = tiles.length - 1; i > 0; i--) {
+			tiles[i][col] = tiles[i - 1][col];
+		}
 		tiles[0][col] = extraTile;
+		tiles[0][col].setRow(tiles.length - 1);
+		tiles[0][col].setCol(col);
+		tiles[0][col].setExtra(false);
+
 		extraTile = newExtraTile;
 	}
 

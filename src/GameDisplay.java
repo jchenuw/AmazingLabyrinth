@@ -40,4 +40,8 @@ public class GameDisplay extends JFrame {
 		setLayout(null);
 		setVisible(true);
 	}
+
+	public void updateBoard(){
+		BoardDisplay.updateBoard(game.getBoard());
+	}
 }
