@@ -242,71 +242,87 @@ public class Board {
 		}
 	}
 
-	public void shiftRowLeft(int row, Tile extraTile) {
+	private void becomeExtraTile(Tile tile) {
+		tile.setRow(-1);
+		tile.setCol(-1);
+		tile.setExtra(true);
+	}
+	private void becomeBoardTile(Tile extraTile, int row, int col) {
+		tiles[row][col] = extraTile;
+		tiles[row][col].setRow(row);
+		tiles[row][col].setCol(col);
+		tiles[row][col].setExtra(false);
+	}
+
+	public void shiftRowLeft(int row) {
+		// Hold new extra tile
 		Tile newExtraTile = tiles[row][0];
-		newExtraTile.setCol(-1);
-		newExtraTile.setRow(-1);
-		newExtraTile.setExtra(true);
+		becomeExtraTile(newExtraTile);
 
-		for (int i = 0; i < tiles[row].length - 1; i++) {
-			tiles[row][i] = tiles[row][i + 1];
+		// Shift row
+		for (int col = 0; col < tiles[row].length - 1; col++) {
+			tiles[row][col] = tiles[row][col + 1];
+			tiles[row][col].setCol(col);
 		}
-		tiles[row][tiles.length - 1] = extraTile;
-		tiles[row][tiles.length - 1].setRow(row);
-		tiles[row][tiles.length - 1].setCol(tiles.length - 1);
-		tiles[row][tiles.length - 1].setExtra(false);
 
+		// Insert previous extra tile to the end of row
+		becomeBoardTile(extraTile, row, tiles.length - 1);
+
+		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
-	public void shiftRowRight(int row, Tile extraTile) {
+	public void shiftRowRight(int row) {
+		// Hold new extra tile
 		Tile newExtraTile = tiles[row][tiles.length - 1];
-		newExtraTile.setCol(-1);
-		newExtraTile.setRow(-1);
-		newExtraTile.setExtra(true);
+		becomeExtraTile(newExtraTile);
 
-		for (int i = tiles[row].length - 1; i > 0; i--) {
-			tiles[row][i] = tiles[row][i - 1];
+		// Shift row
+		for (int col = tiles[row].length - 1; col > 0; col--) {
+			tiles[row][col] = tiles[row][col - 1];
+			tiles[row][col].setCol(col);
 		}
-		tiles[row][0] = extraTile;
-		tiles[row][0].setRow(row);
-		tiles[row][0].setCol(tiles.length - 1);
-		tiles[row][0].setExtra(false);
 
+		// Insert previous extra tile to the start of row
+		becomeBoardTile(extraTile, row, 0);
+
+		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
-	public void shiftColUp(int col, Tile extraTile) {
+	public void shiftColUp(int col) {
+		// Hold new extra tile
 		Tile newExtraTile = tiles[0][col];
-		newExtraTile.setCol(-1);
-		newExtraTile.setRow(-1);
-		newExtraTile.setExtra(true);
+		becomeExtraTile(newExtraTile);
 
-		for (int i = 0; i < tiles.length - 1; i++) {
-			tiles[i][col] = tiles[i + 1][col];
+		// Shift column
+		for (int row = 0; row < tiles.length - 1; row++) {
+			tiles[row][col] = tiles[row + 1][col];
+			tiles[row][col].setRow(row);
 		}
-		tiles[tiles.length - 1][col] = extraTile;
-		tiles[tiles.length - 1][col].setRow(tiles.length - 1);
-		tiles[tiles.length - 1][col].setCol(col);
-		tiles[tiles.length - 1][col].setExtra(false);
 
+		// Insert previous extra tile to the end of column
+		becomeBoardTile(extraTile, tiles.length - 1, col);
+
+		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
-	public void shiftRowDown(int col, Tile extraTile) {
+	public void shiftRowDown(int col) {
+		// Hold new extra tile
 		Tile newExtraTile = tiles[tiles.length - 1][col];
-		newExtraTile.setCol(-1);
-		newExtraTile.setRow(-1);
-		newExtraTile.setExtra(true);
+		becomeExtraTile(newExtraTile);
 
-		for (int i = tiles.length - 1; i > 0; i--) {
-			tiles[i][col] = tiles[i - 1][col];
+		// Shift column
+		for (int row = tiles.length - 1; row > 0; row--) {
+			tiles[row][col] = tiles[row - 1][col];
+			tiles[row][col].setRow(row);
 		}
-		tiles[0][col] = extraTile;
-		tiles[0][col].setRow(tiles.length - 1);
-		tiles[0][col].setCol(col);
-		tiles[0][col].setExtra(false);
 
+		// Insert previous extra tile to the start of column
+		becomeBoardTile(extraTile, 0, col);
+
+		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
