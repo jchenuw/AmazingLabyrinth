@@ -29,10 +29,11 @@ public class BoardDisplay extends JPanel{
 		setVisible(true);
 	}
 
-	public void updateBoard(TileDisplay[][] tiles){
+	public void updateBoard(Board board){
+		this.board = board;
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; j < 7; j++){
-				this.tiles[i][j] = tiles[i][j];
+				tiles[i][j] = new TileDisplay(board.getTiles()[i][j]);
 			}
 		}
 	}
