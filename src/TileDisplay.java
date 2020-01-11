@@ -11,7 +11,6 @@ public class TileDisplay extends JButton implements ActionListener{
 	public TileDisplay(Tile tile) {
 		this.tile = tile;
 
-		setIcon(tile.getIcon());
 		addActionListener(this);
 		setVisible(true);
 	}

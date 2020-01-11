@@ -20,7 +20,7 @@ public class ITile extends Tile {
 	 * @param orientation orientation of the tile
 	 */
 	public ITile(int row, int col, int orientation) {
-		super(row, col, orientation, Game.ImageLoader.I_TILE_ICON);
+		super(row, col, orientation);
 
 		setType('I');
 		updateOpenings();
