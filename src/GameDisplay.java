@@ -3,17 +3,25 @@ import javax.swing.*;
 public class GameDisplay extends JFrame {
 
 	// Underlying game model
-	//private Game game;
+	private Game game;
 	private JFrame GameDisplay;
 
 	// The extra tile
 	private TileDisplay ExtraTileDisplay;
 
 	// The board
+	private Board board;
 	private BoardDisplay BoardDisplay;
 
-	public GameDisplay(Board board) {
+	public static ImageLoader ImageLoader;
+
+	public GameDisplay() {
+		game = new Game(4);
+
+		ImageLoader = new ImageLoader();
+
 		// setup board
+		board = game.getBoard();
 		BoardDisplay = new BoardDisplay(board);
 		BoardDisplay.setLocation(200,50);
 		add(BoardDisplay);

@@ -46,18 +46,20 @@ public class Board {
 			{'L',' ','T',' ','T',' ','L'}
 	};
 	private static final int[][] orientationOfStationaryTiles = new int[][] {
-			{'0',' ','2',' ','2',' ','2'},
+			{'1',' ','2',' ','2',' ','2'},
 			{' ',' ',' ',' ',' ',' ',' '},
 			{'1',' ','1',' ','2',' ','3'},
 			{' ',' ',' ',' ',' ',' ',' '},
 			{'1',' ','0',' ','3',' ','3'},
 			{' ',' ',' ',' ',' ',' ',' '},
-			{'1',' ','0',' ','0',' ','3'},
+			{'0',' ','0',' ','0',' ','3'},
 	};
 
 	// Board tiles
 	// Goes from left to right, top to bottom.
 	private Tile[][] tiles = new Tile[7][7];
+	private Tile extraTile;
+
 
 	// Players pieces
 	private Player[] players;
@@ -80,7 +82,6 @@ public class Board {
 		final int TOTAL_TILE_AMOUNT = TTile.TILE_AMOUNT + LTile.TILE_AMOUNT + ITile.TILE_AMOUNT;
 		final int MAX_SHIFTABLE_TREASURE = 6;
 		final int STATIONARY_TILE_AMOUNT = 12;
-		Random rand = new Random();
 
 		// Initial tile data generation
 		// -------------------------------------------------------------
@@ -120,44 +121,62 @@ public class Board {
 				if(tileType != ' ') {
 
 					// create tile object
-					if(tileType == 'T') {
-						tiles[row][col] = new TTile(row, col, (orientationOfStationaryTiles[row][col] - '0'));
-					} else if (tileType == 'L') {
-						tiles[row][col] = new LTile(row, col, (orientationOfStationaryTiles[row][col] - '0'));
-					} else {
-						tiles[row][col] = new ITile(row, col, (orientationOfStationaryTiles[row][col] - '0'));
-					}
-
-					// add treasure
-					tiles[row][col].setTreasure(treasures[stationaryTreasureCounter]);
+					tiles[row][col] = generateTile(row, col, tileType, stationaryTreasureCounter, true);
 
 					stationaryTreasureCounter++;
 				}
 				// setup movable tiles
 				else {
 					TypeAndTreasureNum currentTileData = shiftableTilesData.get(dataCounter);
-					int currentTreasureNum = currentTileData.getTreasureNum();
-					tileType = currentTileData.getType();
 
 					// create tile object
-					if(tileType == 'T') {
-						tiles[row][col] = new TTile(row, col, (rand.nextInt(4)));
-					} else if (tileType == 'L') {
-						tiles[row][col] = new LTile(row, col, (rand.nextInt(4)));
-					} else {
-						tiles[row][col] = new ITile(row, col, (rand.nextInt(4)));
-					}
+					tiles[row][col] = generateTile(row, col, currentTileData.getType(), currentTileData.getTreasureNum(),false);
 
 					dataCounter++;
-
-					//add treasure
-					if(currentTreasureNum != -1) {
-						tiles[row][col].setTreasure(treasures[currentTreasureNum]);
-					}
 				}
 			}
 		}
+		// -------------------------------------------------------------
+
+		// Setup extraTile
+		// -------------------------------------------------------------
+		TypeAndTreasureNum extraTileData = shiftableTilesData.get(dataCounter);
+
+		// create extra tile object
+		extraTile = generateTile(-1, -1, extraTileData.getType(), extraTileData.getTreasureNum(), false);
+		// -------------------------------------------------------------
+
+		// debug
 		printBoard();
+	}
+
+	public Tile generateTile(int row, int col, char tileType, int treasureNum, boolean isStationary) {
+		Tile newTile;
+		int orientation;
+		Random rand = new Random();
+
+		// generate orientation
+		if(isStationary) {
+			orientation = (orientationOfStationaryTiles[row][col] - '0');
+		} else {
+			orientation = (rand.nextInt(4));
+		}
+
+		// generate new tile object
+		if(tileType == 'T') {
+			newTile = new TTile(row, col,  orientation);
+		} else if (tileType == 'L') {
+			newTile = new LTile(row, col,  orientation);
+		} else {
+			newTile = new ITile(row, col, orientation);
+		}
+
+		//add treasure
+		if(treasureNum != -1) {
+			newTile.setTreasure(treasures[treasureNum]);
+		}
+
+		return newTile;
 	}
 
 	public void printBoard(){
