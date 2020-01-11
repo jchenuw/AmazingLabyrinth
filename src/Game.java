@@ -2,102 +2,112 @@ import java.util.ArrayList;
 
 public class Game {
 
-    // Game board
-    private Board board;
+  // Game board
+  private Board board;
 
-    // Game cards to distribute to players
-	private Card[] cards;
+  // Game cards to distribute to players
+  private Card[] cards;
 
-    // Players of the game
-	private Player[] players;
-	private final int numPlayers;
+  // Players of the game
+  private Player[] players;
+  private final int numPlayers;
 
-	// Treasures
-	private Treasure[] treasures;
+  // Treasures
+  private Treasure[] treasures;
 
-	// Extra insertable tile
-	private Tile extraTile;
+  // Extra insertable tile
+  private Tile extraTile;
 
-	/**
-	 * Creates a new game that initializes a new board
-	 *
-	 * @param numPlayers numbers of players in the game
-	 */
-	public Game(int numPlayers) {
-		this.numPlayers = numPlayers;
+  /**
+   * Creates a new game that initializes a new board
+   *
+   * @param numPlayers numbers of players in the game
+   */
+  public Game(int numPlayers) {
+    this.numPlayers = numPlayers;
 
-		init();
-	}
+    init();
+  }
 
-	/**
-	 * Initializes the game by setting up players and game pieces
-	 */
-	public void init() {
+  /**
+   * Initializes the game by setting up players and game pieces
+   */
+  public void init() {
 
-		// setup pre-game components
-		setupPlayers();
-		setupCardsAndTreasures();
+    // setup pre-game components
+    setupPlayers();
+    setupCardsAndTreasures();
 
-		// initialize new board
-		board = new Board(this.players, this.treasures);
+    // initialize new board
+    board = new Board(this.players, this.treasures);
 
-	}
+    // tile shifting debug
+    //    extraTile = new TTile(-1, -1, 0);
+    //    System.out.println("=====");
+    //    board.printBoard();
+    //    System.out.println("=====");
+    //    board.shiftColUp(1, extraTile);
+    //    System.out.println("=====");
+    //    board.printBoard();
+    //    System.out.println("=====");
 
-	/**
-	 * Initializes players for the game
-	 */
-	public void setupPlayers() {
-		// preset player data
-		String[] colours =  {"Red", "Blue", "Green", "Purple"};
-		int[][] startingPoints = {{0,0}, {6, 0}, {0, 6}, {6, 6}};
+  }
 
-		// generate new players
-		players = new Player[numPlayers];
+  /**
+   * Initializes players for the game
+   */
+  public void setupPlayers() {
+    // preset player data
+    String[] colours =  {"Red", "Blue", "Green", "Purple"};
+    int[][] startingPoints = {{0,0}, {6, 0}, {0, 6}, {6, 6}};
 
-		for(int i = 0; i < numPlayers; i++) {
-			players[i] = new HumanPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]);
-		}
-	}
+    // generate new players
+    players = new Player[numPlayers];
 
-	/**
-	 * Initializes treasures and treasure cards
-	 */
-	public void setupCardsAndTreasures() {
-		// create treasures and treasure cards
-		treasures = new Treasure[Treasure.TREASURE_AMOUNT];
-		cards = new Card[Treasure.TREASURE_AMOUNT];
+    for(int i = 0; i < numPlayers; i++) {
+      players[i] = new HumanPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]);
+    }
+  }
 
-		for(int i = 0; i < Treasure.TREASURE_AMOUNT; i++) {
-			treasures[i] = new Treasure(i);
-			cards[i] = new Card(treasures[i]);
-		}
-	}
+  /**
+   * Initializes treasures and treasure cards
+   */
+  public void setupCardsAndTreasures() {
+    // create treasures and treasure cards
+    treasures = new Treasure[Treasure.TREASURE_AMOUNT];
+    cards = new Card[Treasure.TREASURE_AMOUNT];
 
-	/**
-	 * Checks if a player has won by checking if they have collected all the treasure
-	 *
-	 * @param player is The player to the checked
-	 * @return if the player has won
-	 */
-	public boolean isWinner(Player player){
-		return(player.isWon());
-	}
+    for(int i = 0; i < Treasure.TREASURE_AMOUNT; i++) {
+      treasures[i] = new Treasure(i);
+      cards[i] = new Card(treasures[i]);
+    }
+  }
 
-	// Getters
-	public Board getBoard() {
-		return this.board;
-	}
+  /**
+   * Checks if a player has won by checking if they have collected all the treasure
+   *
+   * @param player is The player to the checked
+   * @return if the player has won
+   */
+  public boolean isWinner(Player player){
+    return(player.isWon());
+  }
 
-	public Treasure[] getTreasure() {
-		return this.treasures;
-	}
+  // Getters
+  public Board getBoard() {
+    return this.board;
+  }
 
-	public Card[] getCards() {
-		return this.cards;
-	}
+  public Treasure[] getTreasure() {
+    return this.treasures;
+  }
 
-	public Tile getExtraTile() {
-		return this.extraTile;
-	}
+  public Card[] getCards() {
+    return this.cards;
+  }
+
+  public Tile getExtraTile() {
+    return this.extraTile;
+  }
 
 }
