@@ -80,12 +80,19 @@ public abstract class Tile extends Piece {
 	}
 
 	/**
-	 * Removes a play from {@code playersOnTile}
+	 * Removes a player from {@code playersOnTile}
 	 *
 	 * @param player Player to be removed
 	 */
 	public void removePlayerOnTile(Player player) {
 		playersOnTile.remove(player);
+	}
+
+	/**
+	 * Clears all players from {@code playersOnTile}
+	 */
+	public void removeAllPlayersOnTile() {
+		playersOnTile.clear();
 	}
 
 	/**
@@ -109,6 +116,24 @@ public abstract class Tile extends Piece {
 	public abstract void updateOpenings();
 
 	// Setters and getters
+	@Override
+	public void setRow(int row) {
+		super.setRow(row);
+
+		// move players on this tile to new row position
+		for(int i = 0; i < playersOnTile.size(); i++) {
+			playersOnTile.get(i).setRow(row);
+		}
+	}
+	@Override
+	public void setCol(int col) {
+		super.setCol(col);
+
+		// move players on this tile to new column position
+		for(int i = 0; i < playersOnTile.size(); i++) {
+			playersOnTile.get(i).setCol(col);
+		}
+	}
 	public boolean getOpening(int dir){
 		return(openings[dir]);
 	}

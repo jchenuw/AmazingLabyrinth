@@ -73,7 +73,7 @@ public class Board {
 
 	public void init() {
 		setupTiles();
-		connectTiles(0, tiles.length, 0, tiles.length);
+		connectTiles(0, tiles.length - 1, 0, tiles.length - 1);
 		connectPlayersToTiles();
 	}
 
@@ -192,8 +192,8 @@ public class Board {
 	 * @param colEnd end of column constraint
 	 */
 	public void connectTiles(int rowStart, int rowEnd, int colStart, int colEnd) {
-		for(int row = rowStart; row < rowEnd; row++) {
-			for(int col = colStart; col < colEnd; col++) {
+		for(int row = rowStart; row <= rowEnd; row++) {
+			for(int col = colStart; col <= colEnd; col++) {
 
 				// Connects to the tile row above
 				if(row != 0 && tiles[row][col].getOpening(0) && tiles[row - 1][col].getOpening(2)) {
@@ -218,6 +218,9 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Connects players to the tiles they're on
+	 */
 	public void connectPlayersToTiles() {
 		for(int i = 0; i < players.length; i++) {
 			tiles[players[i].getRow()][players[i].getCol()].addPlayerOnTile(players[i]);
@@ -246,12 +249,39 @@ public class Board {
 		tile.setRow(-1);
 		tile.setCol(-1);
 		tile.setExtra(true);
+		tile.removeAllPlayersOnTile();
 	}
 	private void becomeBoardTile(Tile extraTile, int row, int col) {
 		tiles[row][col] = extraTile;
 		tiles[row][col].setRow(row);
 		tiles[row][col].setCol(col);
 		tiles[row][col].setExtra(false);
+	}
+
+	/**
+	 * Removes all adjacent tiles for each tile within certain rows and columns
+	 *
+	 * @param rowStart beginning of row constraint
+	 * @param rowEnd end of row constraint
+	 * @param colStart beginning of column constraint
+	 * @param colEnd end of column constraint
+	 */
+	private void disconnectTiles(int rowStart, int rowEnd, int colStart, int colEnd) {
+		for(int row = rowStart; row <= rowEnd; row++) {
+			for(int col = colStart; col <= colEnd; col++) {
+				tiles[row][col].removeAdjTiles();
+			}
+		}
+	}
+
+	private void reAddPlayers(int row, int col) {
+		for(int i = 0; i < players.length; i++) {
+			if(players[i].getRow() == -1 && players[i].getCol() == -1) {
+				players[i].setRow(row);
+				players[i].setCol(col);
+				tiles[row][col].addPlayerOnTile(players[i]);
+			}
+		}
 	}
 
 	public void shiftRowLeft(int row) {
@@ -265,8 +295,15 @@ public class Board {
 			tiles[row][col].setCol(col);
 		}
 
+		// Reconnect tile nodes
+		disconnectTiles(row - 1, row + 1, 0, tiles.length - 1);
+		connectTiles(row - 1, row + 1, 0, tiles.length - 1);
+
 		// Insert previous extra tile to the end of row
 		becomeBoardTile(extraTile, row, tiles.length - 1);
+
+		// Re-add players to end of row if pushed off board
+		reAddPlayers(row, tiles.length - 1);
 
 		// Set the new extra tile
 		extraTile = newExtraTile;
@@ -283,8 +320,15 @@ public class Board {
 			tiles[row][col].setCol(col);
 		}
 
+		// Reconnect tile nodes
+		disconnectTiles(row - 1, row + 1, 0, tiles.length - 1);
+		connectTiles(row - 1, row + 1, 0, tiles.length - 1);
+
 		// Insert previous extra tile to the start of row
 		becomeBoardTile(extraTile, row, 0);
+
+		// Re-add players to start of row if pushed off board
+		reAddPlayers(row, 0);
 
 		// Set the new extra tile
 		extraTile = newExtraTile;
@@ -301,8 +345,15 @@ public class Board {
 			tiles[row][col].setRow(row);
 		}
 
+		// Reconnect tile nodes
+		disconnectTiles(0, tiles.length - 1, col - 1, col + 1);
+		connectTiles(0, tiles.length - 1, col - 1, col + 1);
+
 		// Insert previous extra tile to the end of column
 		becomeBoardTile(extraTile, tiles.length - 1, col);
+
+		// Re-add players to end of column if pushed off board
+		reAddPlayers(tiles.length - 1, col);
 
 		// Set the new extra tile
 		extraTile = newExtraTile;
@@ -319,8 +370,15 @@ public class Board {
 			tiles[row][col].setRow(row);
 		}
 
+		// Reconnect tile nodes
+		disconnectTiles(0, tiles.length - 1, col - 1, col + 1);
+		connectTiles(0, tiles.length - 1, col - 1, col + 1);
+
 		// Insert previous extra tile to the start of column
 		becomeBoardTile(extraTile, 0, col);
+
+		// Re-add players to start of column if pushed off board
+		reAddPlayers(0, col);
 
 		// Set the new extra tile
 		extraTile = newExtraTile;
