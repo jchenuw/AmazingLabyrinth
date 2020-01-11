@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public abstract class Tile extends Piece {
 
 	private Treasure treasure = null;
-	private ArrayList<Tile> adjTiles;
-	private ArrayList<Player> playersOnTile;
+	private ArrayList<Tile> adjTiles = new ArrayList<Tile>();
+	private ArrayList<Player> playersOnTile = new ArrayList<Player>();
 	private char type;
 
 	// Openings of the tile
@@ -24,7 +24,7 @@ public abstract class Tile extends Piece {
 	private int orientation;
 
 	// Determines if tile is the extra
-	private boolean extra;
+	private boolean extra = false;
 
 	/**
 	 * Creates new tile based on row position, column position, and orientation

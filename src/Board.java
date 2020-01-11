@@ -149,6 +149,8 @@ public class Board {
 
 		// debug
 		printBoard();
+		System.out.println();
+		printOrientation();
 	}
 
 	private Tile generateTile(int row, int col, char tileType, int treasureNum, boolean isStationary) {
@@ -190,23 +192,27 @@ public class Board {
 	 * @param colEnd end of column constraint
 	 */
 	public void connectTiles(int rowStart, int rowEnd, int colStart, int colEnd) {
-		for(; rowStart < rowEnd; rowStart++) {
-			for(;colStart < colEnd; colStart++) {
+		for(int row = rowStart; row < rowEnd; row++) {
+			for(int col = colStart; col < colEnd; col++) {
 
-				if(rowStart != 0 && tiles[rowStart][colStart].getOpening(0) && tiles[rowStart - 1][colStart].getOpening(2)) {
-					tiles[rowStart][colStart].addAdjTile(tiles[rowStart - 1][colStart]);
+				// Connects to the tile row above
+				if(row != 0 && tiles[row][col].getOpening(0) && tiles[row - 1][col].getOpening(2)) {
+					tiles[row][col].addAdjTile(tiles[row - 1][col]);
 				}
 
-				if(colStart != 7 && tiles[rowStart][colStart].getOpening(1) && tiles[rowStart][colStart + 1].getOpening(3)) {
-					tiles[rowStart][colStart].addAdjTile(tiles[rowStart][colStart + 1]);
+				// Connects to the tile column right
+				if(col != 6 && tiles[row][col].getOpening(1) && tiles[row][col + 1].getOpening(3)) {
+					tiles[row][col].addAdjTile(tiles[row][col + 1]);
 				}
 
-				if(rowStart != 7 && tiles[rowStart][colStart].getOpening(2) && tiles[rowStart + 1][colStart].getOpening(0)) {
-					tiles[rowStart][colStart].addAdjTile(tiles[rowStart + 1][colStart]);
+				// Connects to the tile row below
+				if(row != 6 && tiles[row][col].getOpening(2) && tiles[row + 1][col].getOpening(0)) {
+					tiles[row][col].addAdjTile(tiles[row + 1][col]);
 				}
 
-				if(colStart != 0 && tiles[rowStart][colStart].getOpening(3) && tiles[rowStart][colStart - 1].getOpening(1)) {
-					tiles[rowStart][colStart].addAdjTile(tiles[rowStart][colStart - 1]);
+				// Connects tot the tile column left
+				if(col != 0 && tiles[row][col].getOpening(3) && tiles[row][col - 1].getOpening(1)) {
+					tiles[row][col].addAdjTile(tiles[row][col - 1]);
 				}
 			}
 		}
@@ -226,6 +232,15 @@ public class Board {
             System.out.println();
         }
     }
+
+	private void printOrientation(){
+		for(int r = 0; r < tiles.length; r++) {
+			for (int c = 0; c < tiles[r].length; c++) {
+				System.out.print(tiles[r][c].getOrientation() + " ");
+			}
+			System.out.println();
+		}
+	}
 
 	public void shiftRowLeft(int row, Tile extraTile) {
 		Tile newExtraTile = tiles[row][0];
