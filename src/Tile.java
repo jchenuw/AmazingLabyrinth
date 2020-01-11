@@ -6,7 +6,6 @@ public abstract class Tile extends Piece {
 
 	private Treasure treasure = null;
 	private ArrayList<Tile> adjTiles;
-	private ImageIcon icon;
 	private char type;
 
 	// Openings of the tile
@@ -14,7 +13,7 @@ public abstract class Tile extends Piece {
 	// 1 - Right
 	// 2 - Down
 	// 3 - Left
-	protected boolean[] openings;
+	protected boolean[] openings = new boolean[4];
 
 	// Orientation of the tile
 	// 0 - 0 degree
@@ -33,11 +32,8 @@ public abstract class Tile extends Piece {
 	 * @param col column position on the board
 	 * @param orientation orientation of the tile
 	 */
-	public Tile(int row, int col, int orientation, ImageIcon icon) {
+	public Tile(int row, int col, int orientation) {
 		super(row, col);
-		System.out.println(Board.TILES_SIDE_LENGTH);
-		this.icon = Game.ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, icon);
-		openings = new boolean[4];
 		this.orientation = orientation;
 	}
 
@@ -118,10 +114,6 @@ public abstract class Tile extends Piece {
 
 	public void setExtra(boolean extra) {
 		this.extra = extra;
-	}
-
-	public ImageIcon getIcon(){
-		return icon;
 	}
 
 	public boolean isExtra() {
