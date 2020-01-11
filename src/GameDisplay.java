@@ -7,7 +7,7 @@ public class GameDisplay extends JFrame {
 	private JFrame GameDisplay;
 
 	// The extra tile
-	private TileDisplay ExtraTileDisplay = new TileDisplay();
+	private TileDisplay ExtraTileDisplay;
 
 	// The board
 	private BoardDisplay BoardDisplay;
@@ -18,7 +18,8 @@ public class GameDisplay extends JFrame {
 		BoardDisplay.setLocation(200,50);
 		add(BoardDisplay);
 
-		// setup extra tile
+		// setup extra
+		ExtraTileDisplay = new TileDisplay(new LTile(0,0,0));
 		ExtraTileDisplay.setBounds(50, 300, 75, 75);
 		ExtraTileDisplay.setText("Extra");
 		ExtraTileDisplay.setEnabled(false);

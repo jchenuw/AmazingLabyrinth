@@ -16,12 +16,12 @@ public class BoardDisplay extends JPanel{
 		// setup board tiles
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; j < 7; j++){
-				tiles[i][j] = new TileDisplay();
+				tiles[i][j] = new TileDisplay(board.getTiles()[i][j]);
 				add(tiles[i][j]);
 			}
 		}
 
-		setSize(600, 600);
+		setSize(Board.BOARD_SIDE_LENGTH, Board.BOARD_SIDE_LENGTH);
 		setLayout(GridLayout);
 		setVisible(true);
 	}

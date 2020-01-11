@@ -1,9 +1,12 @@
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Tile extends Piece {
 
 	private Treasure treasure = null;
 	private ArrayList<Tile> adjTiles;
+	private ImageIcon icon;
 	private char type;
 
 	// Openings of the tile
@@ -30,8 +33,10 @@ public abstract class Tile extends Piece {
 	 * @param col column position on the board
 	 * @param orientation orientation of the tile
 	 */
-	public Tile(int row, int col, int orientation) {
+	public Tile(int row, int col, int orientation, ImageIcon icon) {
 		super(row, col);
+		System.out.println(Board.TILES_SIDE_LENGTH);
+		this.icon = Game.ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, icon);
 		openings = new boolean[4];
 		this.orientation = orientation;
 	}
@@ -100,7 +105,7 @@ public abstract class Tile extends Piece {
 	public void setType(char type) {
 		this.type = type;
 	}
-	public char getType(int type) {
+	public char getType() {
 		return this.type;
 	}
 
@@ -114,6 +119,11 @@ public abstract class Tile extends Piece {
 	public void setExtra(boolean extra) {
 		this.extra = extra;
 	}
+
+	public ImageIcon getIcon(){
+		return icon;
+	}
+
 	public boolean isExtra() {
 		return this.extra;
 	}

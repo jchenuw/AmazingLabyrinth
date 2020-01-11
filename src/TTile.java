@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class TTile extends Tile {
 
 	// Non-stationary T-tiles amount
@@ -19,7 +21,7 @@ public class TTile extends Tile {
 	 * @param orientation orientation of the tile
 	 */
 	public TTile(int row, int col, int orientation) {
-		super(row, col, orientation);
+		super(row, col, orientation, Game.ImageLoader.T_TILE_ICON);
 
 		setType('T');
 		updateOpenings();

@@ -4,6 +4,9 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Board {
+	public static final int NUM_TILES_SIDE = 7;
+	public static final int BOARD_SIDE_LENGTH = 600;
+	public static final int TILES_SIDE_LENGTH = BOARD_SIDE_LENGTH/NUM_TILES_SIDE;
 
 	/**
 	 * Helper class to encapsulate tile {@code type} and {@code treasureNum} pair
@@ -160,7 +163,7 @@ public class Board {
 	public void printBoard(){
         for(int r = 0; r < tiles.length; r++) {
             for (int c = 0; c < tiles[r].length; c++) {
-                System.out.print(tiles[r][c].getType(0) + " ");
+                System.out.print(tiles[r][c].getType() + " ");
             }
             System.out.println();
         }
@@ -237,6 +240,10 @@ public class Board {
 		System.arraycopy(tiles, 0, tiles, 1,  tiles.length - 1);
 		tiles[0][col] = extraTile;
 		extraTile = newExtraTile;
+	}
+
+	public Tile[][] getTiles() {
+		return tiles;
 	}
 }
 

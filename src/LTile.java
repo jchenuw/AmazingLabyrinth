@@ -1,4 +1,5 @@
-import java.util.*;
+import javax.swing.*;
+
 public class LTile extends Tile{
 
 	// Non-stationary L-tiles amount
@@ -19,7 +20,7 @@ public class LTile extends Tile{
 	 * @param orientation orientation of the tile
 	 */
 	public LTile(int row, int col, int orientation) {
-		super(row, col, orientation);
+		super(row, col, orientation, Game.ImageLoader.L_TILE_ICON);
 
 		setType('L');
 		updateOpenings();

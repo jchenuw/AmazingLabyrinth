@@ -1,3 +1,5 @@
+import javax.swing.*;
+
 public class ITile extends Tile {
 
 	// Non-stationary I-tiles amount
@@ -18,11 +20,12 @@ public class ITile extends Tile {
 	 * @param orientation orientation of the tile
 	 */
 	public ITile(int row, int col, int orientation) {
-		super(row, col, orientation);
+		super(row, col, orientation, Game.ImageLoader.I_TILE_ICON);
 
 		setType('I');
 		updateOpenings();
 	}
+
 
 	/**
 	 * Sets openings for I-tiles based on orientation

@@ -8,8 +8,10 @@ public class TileDisplay extends JButton implements ActionListener{
 	private Tile tile;
 	private JButton TileDisplay;
 
-	public TileDisplay() {
-		setText("tile");
+	public TileDisplay(Tile tile) {
+		this.tile = tile;
+
+		setIcon(tile.getIcon());
 		addActionListener(this);
 		setVisible(true);
 	}

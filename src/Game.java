@@ -44,10 +44,10 @@ public class Game {
 		setupPlayers();
 		setupCardsAndTreasures();
 
-        gameDisplay = new GameDisplay(board);
-
 		// initialize new board
 		board = new Board(this.players, this.treasures);
+
+		gameDisplay = new GameDisplay(board);
 	}
 
 	/**
