@@ -225,13 +225,13 @@ public class Board {
 	}
 
 	private void printBoard(){
-        for(int r = 0; r < tiles.length; r++) {
-            for (int c = 0; c < tiles[r].length; c++) {
-                System.out.print(tiles[r][c].getType() + " ");
-            }
-            System.out.println();
-        }
-    }
+		for(int r = 0; r < tiles.length; r++) {
+			for (int c = 0; c < tiles[r].length; c++) {
+				System.out.print(tiles[r][c].getType() + " ");
+			}
+			System.out.println();
+		}
+	}
 
 	private void printOrientation(){
 		for(int r = 0; r < tiles.length; r++) {
@@ -316,7 +316,6 @@ public class Board {
 	}
 
 	public Tile getExtraTile() {
-    	return this.extraTile;
+		return this.extraTile;
 	}
 }
-

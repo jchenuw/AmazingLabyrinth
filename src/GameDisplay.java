@@ -27,10 +27,9 @@ public class GameDisplay extends JFrame {
 		add(BoardDisplay);
 
 		// setup extra
-		ExtraTileDisplay = new TileDisplay(new LTile(0,0,0));
+		ExtraTileDisplay = new TileDisplay(board.getExtraTile());
 		ExtraTileDisplay.setBounds(50, 300, 75, 75);
-		ExtraTileDisplay.setText("Extra");
-		ExtraTileDisplay.setEnabled(false);
+		//ExtraTileDisplay.setEnabled(false);
 		add(ExtraTileDisplay);
 
 		// setup game frame
