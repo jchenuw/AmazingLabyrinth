@@ -5,8 +5,6 @@ import java.util.Random;
 
 public class Board {
 	public static final int NUM_TILES_SIDE = 7;
-	public static final int BOARD_SIDE_LENGTH = 600;
-	public static final int TILES_SIDE_LENGTH = BOARD_SIDE_LENGTH/NUM_TILES_SIDE;
 
 	/**
 	 * Helper class to encapsulate tile {@code type} and {@code treasureNum} pair

@@ -3,6 +3,9 @@ import java.awt.*;
 
 public class BoardDisplay extends JPanel{
 
+	public static final int BOARD_SIDE_LENGTH = 600;
+	public static final int TILES_SIDE_LENGTH = BOARD_SIDE_LENGTH/Board.NUM_TILES_SIDE;
+
 	// Underlying board model
 	private Board board;
 
@@ -21,7 +24,7 @@ public class BoardDisplay extends JPanel{
 			}
 		}
 
-		setSize(Board.BOARD_SIDE_LENGTH, Board.BOARD_SIDE_LENGTH);
+		setSize(BOARD_SIDE_LENGTH, BOARD_SIDE_LENGTH);
 		setLayout(GridLayout);
 		setVisible(true);
 	}
