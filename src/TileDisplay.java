@@ -18,13 +18,13 @@ public class TileDisplay extends JButton implements ActionListener{
 
 	public void setIcon(int rotation){
 		if(tile.getType() == 'T'){
-			setIcon(Game.ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, Game.ImageLoader.T_TILE_ICON[tile.getOrientation()]));
+			setIcon(ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, GameDisplay.ImageLoader.T_TILE_ICON[tile.getOrientation()]));
 		}
 		else if(tile.getType() == 'L'){
-			setIcon(Game.ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, Game.ImageLoader.L_TILE_ICON[tile.getOrientation()]));
+			setIcon(ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, GameDisplay.ImageLoader.L_TILE_ICON[tile.getOrientation()]));
 		}
 		else if(tile.getType() == 'I'){
-			setIcon(Game.ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, Game.ImageLoader.I_TILE_ICON[tile.getOrientation()]));
+			setIcon(ImageLoader.resizeImageIcon(Board.TILES_SIDE_LENGTH, Board.TILES_SIDE_LENGTH, GameDisplay.ImageLoader.I_TILE_ICON[tile.getOrientation()]));
 		}
 	}
 	@Override
