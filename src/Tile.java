@@ -6,6 +6,7 @@ public abstract class Tile extends Piece {
 
 	private Treasure treasure = null;
 	private ArrayList<Tile> adjTiles;
+	private ArrayList<Player> playersOnTile;
 	private char type;
 
 	// Openings of the tile
@@ -67,6 +68,24 @@ public abstract class Tile extends Piece {
 	 */
 	public void removeAdjTiles() {
 		adjTiles.clear();
+	}
+
+	/**
+	 * Adds a player to {@code playersOnTile}
+	 *
+	 * @param player Player to be added
+	 */
+	public void addPlayerOnTile(Player player) {
+		playersOnTile.add(player);
+	}
+
+	/**
+	 * Removes a play from {@code playersOnTile}
+	 *
+	 * @param player Player to be removed
+	 */
+	public void removePlayerOnTile(Player player) {
+		playersOnTile.remove(player);
 	}
 
 	/**

@@ -40,6 +40,7 @@ public class Game {
 
 		// initialize new board
 		board = new Board(this.players, this.treasures);
+		extraTile = board.getExtraTile();
 
 	}
 
