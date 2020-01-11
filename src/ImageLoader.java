@@ -6,22 +6,25 @@ import java.awt.*;
  */
 public class ImageLoader {
     // url for icons
-    private final String T_TILE_URL = "/resource/TTile.jpg";
-    private final String L_TILE_URL = "/resource/LTile.jpg";
-    private final String I_TILE_URL = "/resource/ITile.jpg";
+    private final String T_TILE_URL = "/resource/TTile";
+    private final String L_TILE_URL = "/resource/LTile";
+    private final String I_TILE_URL = "/resource/ITile";
 
     // Icons for game
-    public final ImageIcon T_TILE_ICON;
-    public final ImageIcon L_TILE_ICON;
-    public final ImageIcon I_TILE_ICON;
+    public final ImageIcon[] T_TILE_ICON = new ImageIcon[4];
+    public final ImageIcon[] L_TILE_ICON = new ImageIcon[4];
+    public final ImageIcon[] I_TILE_ICON = new ImageIcon[4];
 
     /**
      * Constructor
      */
     public ImageLoader(){
-        T_TILE_ICON = new ImageIcon(this.getClass().getResource(T_TILE_URL));
-        L_TILE_ICON = new ImageIcon(this.getClass().getResource(L_TILE_URL));
-        I_TILE_ICON = new ImageIcon(this.getClass().getResource(I_TILE_URL));
+
+        for(int j = 0; j < 4; j++){
+            T_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(T_TILE_URL + j + ".jpg"));
+            L_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(L_TILE_URL + j + ".jpg"));
+            I_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(I_TILE_URL + j + ".jpg"));
+        }
     }
 
     public static ImageIcon resizeImageIcon(int newX, int newY, ImageIcon icon){
