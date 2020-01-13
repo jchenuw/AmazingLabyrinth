@@ -11,12 +11,12 @@ public class TileDisplay extends JButton implements ActionListener{
 	public TileDisplay(Tile tile) {
 		this.tile = tile;
 		//setBorderPainted(false);
-		setIcon(tile.getOrientation());
+		setIcon();
 		addActionListener(this);
 		setVisible(true);
 	}
 
-	public void setIcon(int rotation){
+	public void setIcon(){
 		if(tile.getType() == 'T'){
 			setIcon(ImageLoader.resizeImageIcon(checkSize(), checkSize(), GameDisplay.ImageLoader.T_TILE_ICON[tile.getOrientation()]));
 		}
@@ -36,8 +36,18 @@ public class TileDisplay extends JButton implements ActionListener{
 			return BoardDisplay.TILES_SIDE_LENGTH;
 		}
 	}
+
+	public Tile getTile() {
+		return tile;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if(e.getSource() == this){
+			if(tile.isExtra()){
+				tile.rotate();
+				setIcon();
+			}
+		}
 	}
 }
