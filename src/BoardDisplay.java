@@ -44,7 +44,7 @@ public class BoardDisplay extends JLayeredPane implements ActionListener {
 	}
 
 	public void markAdj(TileDisplay tile){
-		tile.setBorder(new LineBorder(Color.red, 5));
+		tile.setBorder(new LineBorder(Color.blue, 5));
 
 		for(int x = 0; x < 7; x++){
 			for(int y = 0; y < 7; y++){
@@ -57,11 +57,20 @@ public class BoardDisplay extends JLayeredPane implements ActionListener {
 		}
 	}
 
+	public void unMarkAdj(){
+		for(int i = 0; i < 7; i++){
+			for(int j = 0; j < 7; j++){
+				tiles[i][j].setBorder(UIManager.getBorder("Button.border"));
+			}
+		}
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; j < 7; j++){
 				if(e.getSource() == tiles[i][j]){
+					unMarkAdj();
 					markAdj(tiles[i][j]);
 				}
 			}
