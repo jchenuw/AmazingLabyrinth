@@ -7,11 +7,11 @@ public class GameDisplay extends JFrame {
 	private JFrame GameDisplay;
 
 	// The extra tile
-	private TileDisplay ExtraTileDisplay;
+	private TileDisplay extraTileDisplay;
 
 	// The board
 	private Board board;
-	private BoardDisplay BoardDisplay;
+	private BoardDisplay boardDisplay;
 
 	public static ImageLoader ImageLoader;
 
@@ -22,15 +22,15 @@ public class GameDisplay extends JFrame {
 
 		// setup board
 		board = game.getBoard();
-		BoardDisplay = new BoardDisplay(board);
-		BoardDisplay.setLocation(200,50);
-		add(BoardDisplay);
+		boardDisplay = new BoardDisplay(board);
+		boardDisplay.setLocation(200,50);
+		add(boardDisplay);
 
 		// setup extra
-		ExtraTileDisplay = new TileDisplay(board.getExtraTile());
-		ExtraTileDisplay.setBounds(50, 300, 75, 75);
+		extraTileDisplay = new TileDisplay(board.getExtraTile());
+		extraTileDisplay.setBounds(50, 300, 75, 75);
 		//ExtraTileDisplay.setEnabled(false);
-		add(ExtraTileDisplay);
+		add(extraTileDisplay);
 
 		// setup game frame
 		setTitle("GameDisplay");
@@ -41,6 +41,6 @@ public class GameDisplay extends JFrame {
 	}
 
 	public void updateBoard(){
-		BoardDisplay.updateBoard(game.getBoard());
+		boardDisplay.updateBoard();
 	}
 }

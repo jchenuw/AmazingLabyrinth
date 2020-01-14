@@ -60,12 +60,12 @@ public class Board {
 
 
 	// Players pieces
-	private Player[] players;
+	private ArrayList<Player> players = new ArrayList<Player>();
 
 	// Treasures
 	private Treasure[] treasures;
 
-	public Board(Player[] players, Treasure[] treasures) {
+	public Board(ArrayList<Player>  players, Treasure[] treasures) {
 		this.players = players;
 		this.treasures = treasures;
 		init();
@@ -191,7 +191,7 @@ public class Board {
 	 * @param colStart beginning of column constraint
 	 * @param colEnd end of column constraint
 	 */
-	public void connectTiles(int rowStart, int rowEnd, int colStart, int colEnd) {
+	private void connectTiles(int rowStart, int rowEnd, int colStart, int colEnd) {
 		// Limit the bounds
 		rowStart = Math.max(rowStart, 0);
 		rowEnd = Math.min(rowEnd, tiles.length - 1);
@@ -225,11 +225,11 @@ public class Board {
 	}
 
 	/**
-	 * Connects players to the tiles they're on
+	 * Adds players to the tiles they're on
 	 */
-	public void connectPlayersToTiles() {
-		for(int i = 0; i < players.length; i++) {
-			tiles[players[i].getRow()][players[i].getCol()].addPlayerOnTile(players[i]);
+	private void connectPlayersToTiles() {
+		for(int i = 0; i < players.size(); i++) {
+			tiles[players.get(i).getRow()][players.get(i).getCol()].addPlayerOnTile(players.get(i));
 		}
 	}
 
@@ -278,7 +278,7 @@ public class Board {
 		rowEnd = Math.min(rowEnd, tiles.length - 1);
 		colStart = Math.max(colStart, 0);
 		colEnd = Math.min(colEnd, tiles.length - 1);
-		
+
 		for(int row = rowStart; row <= rowEnd; row++) {
 			for(int col = colStart; col <= colEnd; col++) {
 				tiles[row][col].removeAdjTiles();
@@ -287,11 +287,11 @@ public class Board {
 	}
 
 	private void reAddPlayers(int row, int col) {
-		for(int i = 0; i < players.length; i++) {
-			if(players[i].getRow() == -1 && players[i].getCol() == -1) {
-				players[i].setRow(row);
-				players[i].setCol(col);
-				tiles[row][col].addPlayerOnTile(players[i]);
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(i).getRow() == -1 && players.get(i).getCol() == -1) {
+				players.get(i).setRow(row);
+				players.get(i).setCol(col);
+				tiles[row][col].addPlayerOnTile(players.get(i));
 			}
 		}
 	}

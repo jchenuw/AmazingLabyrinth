@@ -6,10 +6,15 @@ public class TileDisplay extends JButton implements ActionListener{
 
 	// The tile this image represents
 	private Tile tile;
-	private JButton TileDisplay;
 
+	/**
+	 * Constructor
+	 *
+	 * @param tile the Tile object this represents
+	 */
 	public TileDisplay(Tile tile) {
 		this.tile = tile;
+
 		//setBorderPainted(false);
 		setIcon(tile.getOrientation());
 		addActionListener(this);
@@ -36,6 +41,15 @@ public class TileDisplay extends JButton implements ActionListener{
 			return BoardDisplay.TILES_SIDE_LENGTH;
 		}
 	}
+
+	// Setters and Getters
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
+	public Tile getTile() {
+		return this.tile;
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 

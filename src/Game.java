@@ -9,7 +9,7 @@ public class Game {
 	private Card[] cards;
 
     // Players of the game
-	private Player[] players;
+	private ArrayList<Player> players = new ArrayList<Player>();
 	private final int numPlayers;
 
 	// Treasures
@@ -17,6 +17,8 @@ public class Game {
 
 	// Extra insertable tile
 	private Tile extraTile;
+
+	// Game-state variables
 
 	/**
 	 * Creates a new game that initializes a new board
@@ -52,11 +54,8 @@ public class Game {
 		String[] colours =  {"Red", "Blue", "Green", "Purple"};
 		int[][] startingPoints = {{0,0}, {6, 0}, {0, 6}, {6, 6}};
 
-		// generate new players
-		players = new Player[numPlayers];
-
 		for(int i = 0; i < numPlayers; i++) {
-			players[i] = new HumanPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]);
+			players.add(new HumanPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]));
 		}
 	}
 
