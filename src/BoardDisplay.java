@@ -1,7 +1,10 @@
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BoardDisplay extends JPanel{
+public class BoardDisplay extends JLayeredPane implements ActionListener {
 
 	public static final int BOARD_SIDE_LENGTH = 600;
 	public static final int EXTRA_TILE_SIDE_LENGTH = 75;
@@ -9,39 +12,67 @@ public class BoardDisplay extends JPanel{
 
 	// Underlying board model
 	private Board board;
-	private Tile[][] tiles;
 
 	private GridLayout GridLayout = new GridLayout(7,7);
 
-	private TileDisplay[][] tileDisplays = new TileDisplay[7][7];
+	private TileDisplay[][] tiles = new TileDisplay[7][7];
 
 	public BoardDisplay(Board board) {
 		this.board = board;
-		this.tiles = board.getTiles();
 
-		// setup tile displays for board GUI
+		// setup board tiles
 		for(int i = 0; i < 7; i++){
 			for(int j = 0; j < 7; j++){
-				tileDisplays[i][j] = new TileDisplay(tiles[i][j]);
-				add(tileDisplays[i][j]);
+				tiles[i][j] = new TileDisplay(board.getTiles()[i][j]);
+				tiles[i][j].addActionListener(this);
+				add(tiles[i][j], Integer.valueOf(10));
 			}
 		}
 
-		// Swing setup
 		setSize(BOARD_SIDE_LENGTH, BOARD_SIDE_LENGTH);
 		setLayout(GridLayout);
 		setVisible(true);
 	}
 
-	/**
-	 * Updates the board GUI to match the game board by connecting each {@code tileGUI}
-	 * to its new {@code tile}
-	 */
-	public void updateBoard(){
-		// update each tileGUI and connect it to its new respective tile
-		for(int row = 0; row < Board.NUM_TILES_SIDE; row++){
-			for(int col = 0; col < Board.NUM_TILES_SIDE; col++){
-				tileDisplays[row][col].setTile(tiles[row][col]);
+	public void updateBoard(Board board){
+		this.board = board;
+		for(int i = 0; i < 7; i++){
+			for(int j = 0; j < 7; j++){
+				tiles[i][j] = new TileDisplay(board.getTiles()[i][j]);
+			}
+		}
+	}
+
+	public void markAdj(TileDisplay tile){
+		tile.setBorder(new LineBorder(Color.blue, 5));
+
+		for(int x = 0; x < 7; x++){
+			for(int y = 0; y < 7; y++){
+				for(Tile a: tile.getTile().getAdjTiles()){
+					if(tiles[x][y].getTile() == a){
+						tiles[x][y].setBorder(new LineBorder(Color.red, 5));
+					}
+				}
+			}
+		}
+	}
+
+	public void unMarkAdj(){
+		for(int i = 0; i < 7; i++){
+			for(int j = 0; j < 7; j++){
+				tiles[i][j].setBorder(UIManager.getBorder("Button.border"));
+			}
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		for(int i = 0; i < 7; i++){
+			for(int j = 0; j < 7; j++){
+				if(e.getSource() == tiles[i][j]){
+					unMarkAdj();
+					markAdj(tiles[i][j]);
+				}
 			}
 		}
 	}

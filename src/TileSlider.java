@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class represents the tile slider than inserts the extra tile
@@ -6,7 +8,7 @@ import javax.swing.*;
  *
  * @author Jier Chen
  */
-public class TileSlider extends JButton {
+public class TileSlider extends JButton implements ActionListener {
 
 	// Type of slider:
 	// 'R' - row slider
@@ -51,4 +53,8 @@ public class TileSlider extends JButton {
 	}
 
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	}
 }

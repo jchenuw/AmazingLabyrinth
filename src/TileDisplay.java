@@ -6,22 +6,17 @@ public class TileDisplay extends JButton implements ActionListener{
 
 	// The tile this image represents
 	private Tile tile;
+	private JButton TileDisplay;
 
-	/**
-	 * Constructor
-	 *
-	 * @param tile the Tile object this represents
-	 */
 	public TileDisplay(Tile tile) {
 		this.tile = tile;
-
 		//setBorderPainted(false);
-		setIcon(tile.getOrientation());
+		setIcon();
 		addActionListener(this);
 		setVisible(true);
 	}
 
-	public void setIcon(int rotation){
+	public void setIcon(){
 		if(tile.getType() == 'T'){
 			setIcon(ImageLoader.resizeImageIcon(checkSize(), checkSize(), GameDisplay.ImageLoader.T_TILE_ICON[tile.getOrientation()]));
 		}
@@ -42,16 +37,17 @@ public class TileDisplay extends JButton implements ActionListener{
 		}
 	}
 
-	// Setters and Getters
-	public void setTile(Tile tile) {
-		this.tile = tile;
-	}
 	public Tile getTile() {
-		return this.tile;
+		return tile;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		if(e.getSource() == this){
+			if(tile.isExtra()){
+				tile.rotate();
+				setIcon();
+			}
+		}
 	}
 }

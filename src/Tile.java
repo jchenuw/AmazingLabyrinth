@@ -108,6 +108,7 @@ public abstract class Tile extends Piece {
 			// start back at 'normal' rotation
 			this.orientation = 0;
 		}
+		updateOpenings();
 	}
 
 	/**
@@ -116,6 +117,12 @@ public abstract class Tile extends Piece {
 	public abstract void updateOpenings();
 
 	// Setters and getters
+
+
+	public ArrayList<Tile> getAdjTiles() {
+		return adjTiles;
+	}
+
 	@Override
 	public void setRow(int row) {
 		super.setRow(row);
