@@ -6,9 +6,9 @@ import java.awt.*;
  */
 public class ImageLoader {
 	// url for icons
-	private final String T_TILE_URL = "/resource/TTile";
-	private final String L_TILE_URL = "/resource/LTile";
-	private final String I_TILE_URL = "/resource/ITile";
+	private final String T_TILE_URL = "/resource/tiles/TTile";
+	private final String L_TILE_URL = "/resource/tiles/LTile";
+	private final String I_TILE_URL = "/resource/tiles/ITile";
 
 	// Icons for game
 	public final ImageIcon[] T_TILE_ICON = new ImageIcon[4];
@@ -21,9 +21,9 @@ public class ImageLoader {
 	public ImageLoader(){
 
 		for(int j = 0; j < 4; j++){
-			T_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(T_TILE_URL + j + ".jpg"));
-			L_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(L_TILE_URL + j + ".jpg"));
-			I_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(I_TILE_URL + j + ".jpg"));
+			//T_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(T_TILE_URL + j + ".jpg"));
+			//L_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(L_TILE_URL + j + ".jpg"));
+			//I_TILE_ICON[j] = new ImageIcon(this.getClass().getResource(I_TILE_URL + j + ".jpg"));
 		}
 	}
 

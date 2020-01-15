@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -6,39 +7,35 @@ public class TileDisplay extends JButton implements ActionListener{
 
 	// The tile this image represents
 	private Tile tile;
-	private JButton TileDisplay;
 
 	public TileDisplay(Tile tile) {
 		this.tile = tile;
+
 		//setBorderPainted(false);
-		setIcon();
+		updateIcon();
 		addActionListener(this);
 		setVisible(true);
 	}
 
-	public void setIcon(){
-		if(tile.getType() == 'T'){
-			setIcon(ImageLoader.resizeImageIcon(checkSize(), checkSize(), GameDisplay.ImageLoader.T_TILE_ICON[tile.getOrientation()]));
-		}
-		else if(tile.getType() == 'L'){
-			setIcon(ImageLoader.resizeImageIcon(checkSize(), checkSize(), GameDisplay.ImageLoader.L_TILE_ICON[tile.getOrientation()]));
-		}
-		else if(tile.getType() == 'I'){
-			setIcon(ImageLoader.resizeImageIcon(checkSize(), checkSize(), GameDisplay.ImageLoader.I_TILE_ICON[tile.getOrientation()]));
-		}
+	public void updateIcon(){
+		setIcon(new ImageIcon(this.getClass().getResource("/resource/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
 	}
 
 	public int checkSize(){
 		if(tile.isExtra()){
-			return BoardDisplay.EXTRA_TILE_SIDE_LENGTH;
+			return 80;
 		}
 		else{
 			return BoardDisplay.TILES_SIDE_LENGTH;
 		}
 	}
 
+	// Setters and Getters
+	public void setTile(Tile tile) {
+		this.tile = tile;
+	}
 	public Tile getTile() {
-		return tile;
+		return this.tile;
 	}
 
 	@Override
@@ -46,7 +43,7 @@ public class TileDisplay extends JButton implements ActionListener{
 		if(e.getSource() == this){
 			if(tile.isExtra()){
 				tile.rotate();
-				setIcon();
+				updateIcon();
 			}
 		}
 	}

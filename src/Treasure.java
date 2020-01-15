@@ -2,7 +2,7 @@ public class Treasure {
 
 	public static final int TREASURE_AMOUNT = 24;
 
-    private final int TREASURE_NUM;
+    private int treasureNum;
     private boolean collected = false;
     private Tile tileOwner;
 
@@ -12,12 +12,12 @@ public class Treasure {
 	 * @param treasureNum integer id of this treasure
 	 */
 	public Treasure(int treasureNum) {
-    	TREASURE_NUM = treasureNum;
+    	this.treasureNum = treasureNum;
 	}
 
 	// Setters and getters
 	public int getTreasureNum() {
-		return this.TREASURE_NUM;
+		return this.treasureNum;
 	}
 
 	public void setCollected(boolean collected) {

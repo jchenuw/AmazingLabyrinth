@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Random;
 
 public class Board {
-	public static final int NUM_TILES_SIDE = 7;
+	public static final int TILES_PER_SIDE = 7;
 
 	/**
 	 * Helper class to encapsulate tile {@code type} and {@code treasureNum} pair

@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -8,53 +7,43 @@ import java.awt.event.ActionListener;
  *
  * @author Jier Chen
  */
-public class TileSlider extends JButton implements ActionListener {
+public class TileSlider extends JButton {
 
-	// Type of slider:
-	// 'R' - row slider
-	// 'C' - column slider
-	private char type;
+	// Orientation of the slider direction
+	// 0 - Up
+	// 1 - Right
+	// 2 - Down
+	// 3 - Left
+	private int orientation;
 
 	// row or column line the slider is responsible for
 	private int lineResponsible;
 
-	// Direction the tiles are pushed
-	// 'U' - up
-	// 'D' - down
-	private char direction;
+	private boolean disabled = false;
+
+	public TileSlider(int lineResponsible, int orientation) {
+		this.orientation = orientation;
+		this.lineResponsible = lineResponsible;
+
+		setIcon(new ImageIcon(this.getClass().getResource("/resource/sliders/arrow" + this.orientation + ".png")));
+	}
 
 	/**
-	 * Constructor
-	 *
-	 * @param type slider type
-	 * @param lineResponsible row or column index responsible for
-	 * @param direction direction the tiles are pushed
-	 * @param image png to display in Swing
+	 * Toggles {@code disabled} boolean
 	 */
-	public TileSlider(char type, int lineResponsible, char direction, ImageIcon image) {
-		this.type = type;
-		this.lineResponsible = lineResponsible;
-		this.direction = direction;
-
-		setIcon(image);
+	public void toggleDisabled() {
+		this.disabled = !disabled;
 	}
 
 	// Getters
-	public char getType() {
-		return this.type;
-	}
-
 	public int getLineResponsible() {
 		return this.lineResponsible;
 	}
-
-	public int getDirection() {
-		return this.direction;
+	public boolean isDisabled() {
+		return this.disabled;
+	}
+	public int getOrientation() {
+		return this.orientation;
 	}
 
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
 }
