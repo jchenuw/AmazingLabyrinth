@@ -1,27 +1,17 @@
 import javax.swing.*;
 
-public class Card extends JLabel {
+public class Card {
 
 	// Treasure to collect for this card
-	private Treasure cardTreasure;
+	private Treasure treasure;
 
 	// If the treasure on the card has been collected
 	private boolean isCollected = false;
 
-	// Owner of this card
-	private Player owner = null;
 
 	// Constructor
-	public Card(Treasure cardTreasure) {
-		this.cardTreasure = cardTreasure;
-	}
-
-	public boolean isMatch(Treasure treasure) {
-		if(treasure == cardTreasure) {
-			return true;
-		}
-
-		return false;
+	public Card(Treasure treasure) {
+		this.treasure = treasure;
 	}
 
 	public void complete() {
@@ -29,11 +19,8 @@ public class Card extends JLabel {
 	}
 
 	// Setters and getters
-	public void setOwner(Player player) {
-		this.owner = player;
-	}
-	public Player getOwner() {
-		return owner;
+	public Treasure getTreasure() {
+		return this.treasure;
 	}
 
 }

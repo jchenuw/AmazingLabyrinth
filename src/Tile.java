@@ -1,5 +1,3 @@
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 public abstract class Tile extends Piece {
@@ -77,6 +75,13 @@ public abstract class Tile extends Piece {
 	 */
 	public void addPlayerOnTile(Player player) {
 		playersOnTile.add(player);
+
+		if(player.getCurrentCard() != null && player.getCurrentCard().getTreasure() == this.treasure) {
+			player.goToNextCard();
+
+			this.treasure.setCollected(true);
+			this.treasure = null;
+		}
 	}
 
 	/**
@@ -147,6 +152,11 @@ public abstract class Tile extends Piece {
 
 	public void setTreasure(Treasure treasure) {
 		this.treasure = treasure;
+
+		this.treasure.setTileOwner(this);
+	}
+	public Treasure getTreasure() {
+		return this.treasure;
 	}
 
 	public void setType(char type) {
