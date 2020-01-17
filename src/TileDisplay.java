@@ -1,50 +1,55 @@
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TileDisplay extends JButton implements ActionListener{
+public class TileDisplay extends JLayeredPane{
 
-	// The tile this image represents
-	private Tile tile;
+	private TileImage tileImage;
+	private JLabel treasureImage;
 
-	public TileDisplay(Tile tile) {
-		this.tile = tile;
+	public TileDisplay(int row, int col) {
+		tileImage = new TileImage(row, col);
+		treasureImage = new JLabel();
 
 		//setBorderPainted(false);
-		updateIcon();
-		addActionListener(this);
 		setVisible(true);
+		setLayout(null);
+
+		// Properties of background image
+		tileImage.setSize(BoardDisplay.TILES_SIDE_LENGTH, BoardDisplay.TILES_SIDE_LENGTH);
+		tileImage.setLocation(0, 0);
+
+		// Properties of treasure image
+		treasureImage.setSize(50,50);
+		treasureImage.setLocation(19,18);
+
+		add(tileImage, JLayeredPane.DEFAULT_LAYER);
+		add(treasureImage, JLayeredPane.POPUP_LAYER);
 	}
 
-	public void updateIcon(){
-		setIcon(new ImageIcon(this.getClass().getResource("/resource/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
-	}
+	public void update(Tile tile){
+		tileImage.setIcon(new ImageIcon(this.getClass().
+				getResource("/resource/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
 
-	public int checkSize(){
-		if(tile.isExtra()){
-			return 80;
-		}
-		else{
-			return BoardDisplay.TILES_SIDE_LENGTH;
-		}
-	}
-
-	// Setters and Getters
-	public void setTile(Tile tile) {
-		this.tile = tile;
-	}
-	public Tile getTile() {
-		return this.tile;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == this){
-			if(tile.isExtra()){
-				tile.rotate();
-				updateIcon();
-			}
+		if(tile.hasTreasure()) {
+			treasureImage.setIcon(new ImageIcon(this.getClass().
+					getResource("/resource/treasures/" + tile.getTreasure().getTreasureNum() + ".png")));
 		}
 	}
+
+	public void removeTreasureImage() {
+		this.remove(treasureImage);
+		this.revalidate();
+		this.repaint();
+
+		treasureImage = null;
+	}
+
+	public void addRotateListener(ActionListener rotateListener) {
+		tileImage.addActionListener(rotateListener);
+	}
+
+	public void addMoveListener(ActionListener moveListener) {
+		tileImage.addActionListener(moveListener);
+	}
+
 }
