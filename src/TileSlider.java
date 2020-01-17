@@ -25,7 +25,14 @@ public class TileSlider extends JButton {
 		this.orientation = orientation;
 		this.lineResponsible = lineResponsible;
 
-		setIcon(new ImageIcon(this.getClass().getResource("/resource/sliders/arrow" + this.orientation + ".png")));
+		// Properties
+		setIcon(new ImageIcon(this.getClass().getResource("/resource/sliders/arrow" + this.orientation + ".png")));// Properties
+		setSize(BoardDisplay.TILES_SIDE_LENGTH, BoardDisplay.TILES_SIDE_LENGTH);
+		setVisible(true);
+		setOpaque(false);
+		setContentAreaFilled(false);
+		setBorderPainted(false);
+		setFocusPainted(false);
 	}
 
 	/**
