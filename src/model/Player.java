@@ -1,3 +1,5 @@
+package model;
+
 import java.util.*;
 
 public abstract class Player extends Piece {
@@ -21,11 +23,18 @@ public abstract class Player extends Piece {
 	 * Draws the next card for player
 	 */
 	public void goToNextCard() {
-		// remove obtained treasure
-		hand.pop();
 
-		// go to next treasure to collect
-		currentCard = hand.peek();
+		if(hand.size() != 0) {
+			// remove obtained treasure
+			hand.pop();
+		}
+
+		if(hand.size() != 0) {
+			// go to next treasure to collect
+			currentCard = hand.peek();
+		} else {
+			currentCard = null;
+		}
 	}
 
 	/**
@@ -42,6 +51,10 @@ public abstract class Player extends Piece {
 	// Getters and setters
 	public void setHand(Stack<Card> hand) {
 		this.hand = hand;
+
+		if(hand.size() != 0) {
+			currentCard = hand.peek();
+		}
 	}
 	public Stack<Card> getHand() {
 		return this.hand;

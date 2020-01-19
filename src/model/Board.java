@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -53,19 +55,19 @@ public class Board {
 			{'0',' ','0',' ','0',' ','3'},
 	};
 
-	// Board tiles
+	// model.Board tiles
 	// Goes from left to right, top to bottom.
 	private Tile[][] tiles = new Tile[7][7];
 	private Tile extraTile;
 
 
 	// Players pieces
-	private ArrayList<Player> players = new ArrayList<Player>();
+	private Player[] players;
 
 	// Treasures
 	private Treasure[] treasures;
 
-	public Board(ArrayList<Player>  players, Treasure[] treasures) {
+	public Board(Player[] players, Treasure[] treasures) {
 		this.players = players;
 		this.treasures = treasures;
 		init();
@@ -228,8 +230,11 @@ public class Board {
 	 * Adds players to the tiles they're on
 	 */
 	private void connectPlayersToTiles() {
-		for(int i = 0; i < players.size(); i++) {
-			tiles[players.get(i).getRow()][players.get(i).getCol()].addPlayerOnTile(players.get(i));
+		for(int i = 0; i < players.length; i++) {
+			Tile homeTile = tiles[players[i].getRow()][players[i].getCol()];
+
+			players[i].setHomeTile(homeTile);
+			homeTile.addPlayerOnTile(players[i]);
 		}
 	}
 
@@ -287,11 +292,11 @@ public class Board {
 	}
 
 	private void reAddPlayers(int row, int col) {
-		for(int i = 0; i < players.size(); i++) {
-			if(players.get(i).getRow() == -1 && players.get(i).getCol() == -1) {
-				players.get(i).setRow(row);
-				players.get(i).setCol(col);
-				tiles[row][col].addPlayerOnTile(players.get(i));
+		for(int i = 0; i < players.length; i++) {
+			if(players[i].getRow() == -1 && players[i].getCol() == -1) {
+				players[i].setRow(row);
+				players[i].setCol(col);
+				tiles[row][col].addPlayerOnTile(players[i]);
 			}
 		}
 	}
@@ -396,6 +401,21 @@ public class Board {
 		extraTile = newExtraTile;
 	}
 
+	public void movePlayer(Player player, int row, int col) {
+		// Remove player from its current tile
+		tiles[player.getRow()][player.getCol()].removePlayerOnTile(player);
+
+		// Move to new tile
+		player.setRow(row);
+		player.setCol(col);
+		tiles[row][col].addPlayerOnTile(player);
+
+		// Check if player returned home with all treasures
+		if(player.hasCollectedAll() && tiles[player.getRow()][player.getCol()] == player.getHomeTile()) {
+			player.setReturnedHome(true);
+		}
+	}
+
 	// Setters and getters
 	public Tile[][] getTiles() {
 		return tiles;
@@ -403,5 +423,13 @@ public class Board {
 
 	public Tile getExtraTile() {
 		return this.extraTile;
+	}
+
+	public Player[] getPlayers() {
+		return this.players;
+	}
+
+	public Treasure[] getTreasures() {
+		return this.treasures;
 	}
 }

@@ -1,4 +1,4 @@
-import javax.swing.*;
+package model;
 
 public class LTile extends Tile{
 

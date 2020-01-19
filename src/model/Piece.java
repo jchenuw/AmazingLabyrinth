@@ -1,3 +1,5 @@
+package model;
+
 public abstract class Piece {
 
     // row and column positions
@@ -5,7 +7,7 @@ public abstract class Piece {
     private int col;
 
 	/**
-	 * Piece constructor
+	 * model.Piece constructor
 	 *
 	 * @param row row position on the board
 	 * @param col column position on the board

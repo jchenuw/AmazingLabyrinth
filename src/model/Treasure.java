@@ -1,3 +1,5 @@
+package model;
+
 public class Treasure {
 
 	public static final int TREASURE_AMOUNT = 24;
@@ -7,7 +9,7 @@ public class Treasure {
     private Tile tileOwner;
 
 	/**
-	 * Treasure constructor
+	 * model.Treasure constructor
 	 *
 	 * @param treasureNum integer id of this treasure
 	 */

@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+package model;
+
 import java.util.Random;
 import java.util.Stack;
 
@@ -45,10 +46,10 @@ public class Game {
 		}
 	}
 
-    // Game board
+    // model.Game board
     private Board board;
 
-    // Game cards to distribute to players
+    // model.Game cards to distribute to players
 	private Card[] cards;
 
     // Players of the game

@@ -1,8 +1,8 @@
-import javax.swing.*;
+package model;
 
 public class Card {
 
-	// Treasure to collect for this card
+	// model.Treasure to collect for this card
 	private Treasure treasure;
 
 	// If the treasure on the card has been collected

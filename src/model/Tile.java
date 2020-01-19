@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 
 public abstract class Tile extends Piece {
@@ -55,7 +57,7 @@ public abstract class Tile extends Piece {
 	/**
 	 * Connects a tile to {@code adjTiles}
 	 *
-	 * @param tile Tile to be connected
+	 * @param tile model.Tile to be connected
 	 */
 	public void addAdjTile(Tile tile) {
 		adjTiles.add(tile);
@@ -71,7 +73,7 @@ public abstract class Tile extends Piece {
 	/**
 	 * Adds a player to {@code playersOnTile}
 	 *
-	 * @param player Player to be added
+	 * @param player model.Player to be added
 	 */
 	public void addPlayerOnTile(Player player) {
 		playersOnTile.add(player);
@@ -87,7 +89,7 @@ public abstract class Tile extends Piece {
 	/**
 	 * Removes a player from {@code playersOnTile}
 	 *
-	 * @param player Player to be removed
+	 * @param player model.Player to be removed
 	 */
 	public void removePlayerOnTile(Player player) {
 		playersOnTile.remove(player);
@@ -184,7 +186,7 @@ public abstract class Tile extends Piece {
 	// Object class toString
 	@Override
 	public String toString() {
-		return "Tile: row = " + getRow() + ", col = " + getCol() + ", type = " + type + ", orientation = " + (orientation * 90) + " degrees, " + "has treasure = " + hasTreasure()
+		return "model.Tile: row = " + getRow() + ", col = " + getCol() + ", type = " + type + ", orientation = " + (orientation * 90) + " degrees, " + "has treasure = " + hasTreasure()
 				+ ", openings: " + openings[0] + " " + openings[1] + " " + openings[2] + " " + openings[3];
 	}
 }
