@@ -16,14 +16,15 @@ public class GameController {
 
 	private Game.TurnState turnState;
 
-	public GameController(GameDisplay gameDisplay) {
+	public GameController(GameDisplay gameDisplay, Game game) {
 		this.gameDisplay = gameDisplay;
-		this.game = gameDisplay.getGame();
+		this.game = game;
 
 		this.boardDisplay = gameDisplay.getBoardDisplay();
 		this.board = game.getBoard();
 
 		this.turnState = game.getTurnState();
+
 		init();
 	}
 
@@ -42,7 +43,12 @@ public class GameController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			TileSlider slider = (TileSlider) e.getSource();
-			System.out.println(slider.getLineResponsible());
+
+			game.slideExtraTileTurn(slider.getOrientation(), slider.getLineResponsible());
+
+			boardDisplay.updateBoard();
+			gameDisplay.getExtraTileDisplay().update(board.getExtraTile());
+			boardDisplay.updatePlayerViews();
 		}
 	}
 
@@ -50,19 +56,29 @@ public class GameController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			// Rotate extra tile
-			game.getExtraTile().rotate();
+			board.getExtraTile().rotate();
 
 			// Update extraTileDisplay
-			gameDisplay.getExtraTileDisplay().update(game.getExtraTile());
+			gameDisplay.getExtraTileDisplay().update(board.getExtraTile());
 		}
 	}
 
 	public class MoveListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			TileImage tileImage = (TileImage) e.getSource();
+			TileDisplay[][] tileDisplays = boardDisplay.getTileDisplays();
 
-			System.out.println(tileImage.getRow() + " " + tileImage.getCol());
+			// Scroll through all Tile JButtons
+			for(int row = 0; row < tileDisplays.length; row++) {
+				for(int col = 0; col < tileDisplays.length; col++) {
+					if(e.getSource() == tileDisplays[row][col].getTileImage()) {
+						game.movePlayerTurn(row, col);
+
+						boardDisplay.updateBoard();
+						boardDisplay.updatePlayerViews();
+					}
+				}
+			}
 
 		}
 	}
