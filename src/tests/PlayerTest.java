@@ -83,6 +83,7 @@ public class PlayerTest {
 		player.setReturnedHome(true);
 
 		Assertions.assertEquals(player.hasWon(), true);
+
 	}
 
 }
