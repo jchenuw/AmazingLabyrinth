@@ -1,5 +1,8 @@
 package model;
 
+import util.MoveCommand;
+import util.SlideCommand;
+
 import java.util.Random;
 import java.util.Stack;
 
@@ -44,6 +47,9 @@ public class Game {
 		public boolean hasGameEnd() {
 			return this.gameEnd;
 		}
+		public void setGameEnd() {
+			this.gameEnd = gameEnd;
+		}
 	}
 
     // model.Game board
@@ -81,7 +87,10 @@ public class Game {
 		turnState.gameEnd = true;
 	}
 
-	public void nextTurn() {
+	/**
+	 * End current player's turn and reset turn variables
+	 */
+	public void endTurn() {
 		turnState.playerTurn++;
 
 		if(turnState.playerTurn > players.length) {
@@ -167,6 +176,26 @@ public class Game {
 		}
 	}
 
+	public void slideExtraTileTurn(int orientation, int line) {
+		SlideCommand slideCommand = new SlideCommand(this.board, orientation, line);
+
+		if(slideCommand.isLegal()) {
+			slideCommand.execute();
+		}
+
+		turnState.insertedTile = true;
+	}
+
+	public void movePlayerTurn(int targetRow, int targetCol) {
+		MoveCommand moveCommand = new MoveCommand(this.board, players[turnState.playerTurn], targetRow, targetCol);
+
+		if(moveCommand.isLegal()) {
+			moveCommand.execute();
+		}
+
+		turnState.moved = true;
+	}
+
 	// Getters
 	public Board getBoard() {
 		return this.board;
@@ -178,10 +207,6 @@ public class Game {
 
 	public Card[] getCards() {
 		return this.cards;
-	}
-
-	public Tile getExtraTile() {
-		return this.extraTile;
 	}
 
 	public TurnState getTurnState() {
