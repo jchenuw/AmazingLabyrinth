@@ -122,18 +122,20 @@ public class Board {
 				// set-up preset/stationary tiles
 				if(tileType != ' ') {
 
-					// create tile object
-					tiles[row][col] = generateTile(row, col, tileType, stationaryTreasureCounter, true);
-
-					stationaryTreasureCounter++;
+					// Stationary L-tiles have no treasures
+					if(tileType == 'L') {
+						tiles[row][col] = generateTile(row, col, tileType, -1, true);
+					}
+					else {
+						tiles[row][col] = generateTile(row, col, tileType, stationaryTreasureCounter, true);
+						stationaryTreasureCounter++;
+					}
 				}
 				// setup movable tiles
 				else {
 					TypeAndTreasureNum currentTileData = shiftableTilesData.get(dataCounter);
 
-					// create tile object
 					tiles[row][col] = generateTile(row, col, currentTileData.getType(), currentTileData.getTreasureNum(),false);
-
 					dataCounter++;
 				}
 			}
@@ -153,6 +155,7 @@ public class Board {
 		printBoard();
 		System.out.println();
 		printOrientation();
+		System.out.println();
 	}
 
 	private Tile generateTile(int row, int col, char tileType, int treasureNum, boolean isStationary) {
@@ -203,22 +206,22 @@ public class Board {
 		for(int row = rowStart; row <= rowEnd; row++) {
 			for(int col = colStart; col <= colEnd; col++) {
 
-				// Connects to the tile row above
+				// Connects to the tile above
 				if(row != 0 && tiles[row][col].getOpening(0) && tiles[row - 1][col].getOpening(2)) {
 					tiles[row][col].addAdjTile(tiles[row - 1][col]);
 				}
 
-				// Connects to the tile column right
+				// Connects to the tile to the right
 				if(col != 6 && tiles[row][col].getOpening(1) && tiles[row][col + 1].getOpening(3)) {
 					tiles[row][col].addAdjTile(tiles[row][col + 1]);
 				}
 
-				// Connects to the tile row below
+				// Connects to the tile below
 				if(row != 6 && tiles[row][col].getOpening(2) && tiles[row + 1][col].getOpening(0)) {
 					tiles[row][col].addAdjTile(tiles[row + 1][col]);
 				}
 
-				// Connects tot the tile column left
+				// Connects to the tile to the left
 				if(col != 0 && tiles[row][col].getOpening(3) && tiles[row][col - 1].getOpening(1)) {
 					tiles[row][col].addAdjTile(tiles[row][col - 1]);
 				}
@@ -254,19 +257,6 @@ public class Board {
 			}
 			System.out.println();
 		}
-	}
-
-	private void becomeExtraTile(Tile tile) {
-		tile.setRow(-1);
-		tile.setCol(-1);
-		tile.setExtra(true);
-		tile.removeAllPlayersOnTile();
-	}
-	private void becomeBoardTile(Tile extraTile, int row, int col) {
-		tiles[row][col] = extraTile;
-		tiles[row][col].setRow(row);
-		tiles[row][col].setCol(col);
-		tiles[row][col].setExtra(false);
 	}
 
 	/**
@@ -312,17 +302,14 @@ public class Board {
 			tiles[row][col].setCol(col);
 		}
 
+		// Insert previous extra tile to the end of row
+		becomeBoardTile(extraTile, row, tiles.length - 1);
+
 		// Reconnect tile nodes
 		disconnectTiles(row - 1, row + 1, 0, tiles.length - 1);
 		connectTiles(row - 1, row + 1, 0, tiles.length - 1);
 
-		// Insert previous extra tile to the end of row
-		becomeBoardTile(extraTile, row, tiles.length - 1);
-
-		// Re-add players to end of row if pushed off board
 		reAddPlayers(row, tiles.length - 1);
-
-		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
@@ -337,17 +324,14 @@ public class Board {
 			tiles[row][col].setCol(col);
 		}
 
+		// Insert previous extra tile to the start of row
+		becomeBoardTile(extraTile, row, 0);
+
 		// Reconnect tile nodes
 		disconnectTiles(row - 1, row + 1, 0, tiles.length - 1);
 		connectTiles(row - 1, row + 1, 0, tiles.length - 1);
 
-		// Insert previous extra tile to the start of row
-		becomeBoardTile(extraTile, row, 0);
-
-		// Re-add players to start of row if pushed off board
 		reAddPlayers(row, 0);
-
-		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
@@ -362,21 +346,18 @@ public class Board {
 			tiles[row][col].setRow(row);
 		}
 
+		// Insert previous extra tile to the end of column
+		becomeBoardTile(extraTile, tiles.length - 1, col);
+
 		// Reconnect tile nodes
 		disconnectTiles(0, tiles.length - 1, col - 1, col + 1);
 		connectTiles(0, tiles.length - 1, col - 1, col + 1);
 
-		// Insert previous extra tile to the end of column
-		becomeBoardTile(extraTile, tiles.length - 1, col);
-
-		// Re-add players to end of column if pushed off board
 		reAddPlayers(tiles.length - 1, col);
-
-		// Set the new extra tile
 		extraTile = newExtraTile;
 	}
 
-	public void shiftRowDown(int col) {
+	public void shiftColDown(int col) {
 		// Hold new extra tile
 		Tile newExtraTile = tiles[tiles.length - 1][col];
 		becomeExtraTile(newExtraTile);
@@ -387,18 +368,30 @@ public class Board {
 			tiles[row][col].setRow(row);
 		}
 
+		// Insert previous extra tile to the start of column
+		becomeBoardTile(extraTile, 0, col);
+
 		// Reconnect tile nodes
 		disconnectTiles(0, tiles.length - 1, col - 1, col + 1);
 		connectTiles(0, tiles.length - 1, col - 1, col + 1);
 
-		// Insert previous extra tile to the start of column
-		becomeBoardTile(extraTile, 0, col);
-
-		// Re-add players to start of column if pushed off board
 		reAddPlayers(0, col);
-
-		// Set the new extra tile
 		extraTile = newExtraTile;
+	}
+
+	private void becomeExtraTile(Tile tile) {
+		tile.setRow(-1);
+		tile.setCol(-1);
+		tile.setExtra(true);
+		tile.removeAllPlayersOnTile();
+		tile.removeAdjTiles();
+	}
+
+	private void becomeBoardTile(Tile extraTile, int row, int col) {
+		tiles[row][col] = extraTile;
+		tiles[row][col].setRow(row);
+		tiles[row][col].setCol(col);
+		tiles[row][col].setExtra(false);
 	}
 
 	public void movePlayer(Player player, int row, int col) {
