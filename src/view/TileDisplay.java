@@ -32,12 +32,15 @@ public class TileDisplay extends JLayeredPane{
 
 	public void update(Tile tile){
 		tileImage.setIcon(new ImageIcon(this.getClass().
-				getResource("/resource/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
+				getResource("../resource/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
 
 		if(tile.hasTreasure()) {
 			treasureImage.setIcon(new ImageIcon(this.getClass().
-					getResource("/resource/treasures/" + tile.getTreasure().getTreasureNum() + ".png")));
+					getResource("../resource/treasures/" + tile.getTreasure().getTreasureNum() + ".png")));
+		} else {
+			treasureImage.setIcon(null);
 		}
+		
 	}
 
 	public void removeTreasureImage() {
@@ -56,4 +59,8 @@ public class TileDisplay extends JLayeredPane{
 		tileImage.addActionListener(moveListener);
 	}
 
+	// Getter
+	public JButton getTileImage() {
+		return this.tileImage;
+	}
 }
