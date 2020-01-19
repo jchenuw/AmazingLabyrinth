@@ -1,3 +1,6 @@
+import controller.GameController;
+import view.GameDisplay;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,7 +43,7 @@ public class Menu extends JFrame implements ActionListener {
         // if start button is pressed start game
         if (e.getSource() == b[0]) {
             System.out.println("Start Pressed");
-            new GameDisplay();
+            new GameController(new GameDisplay());
             dispose();
         }
 

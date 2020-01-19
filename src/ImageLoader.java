@@ -6,9 +6,9 @@ import java.awt.*;
  */
 public class ImageLoader {
 	// url for icons
-	private final String T_TILE_URL = "/resource/tiles/TTile";
-	private final String L_TILE_URL = "/resource/tiles/LTile";
-	private final String I_TILE_URL = "/resource/tiles/ITile";
+	private final String T_TILE_URL = "/resource/tiles/model.TTile";
+	private final String L_TILE_URL = "/resource/tiles/model.LTile";
+	private final String I_TILE_URL = "/resource/tiles/model.ITile";
 
 	// Icons for game
 	public final ImageIcon[] T_TILE_ICON = new ImageIcon[4];

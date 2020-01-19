@@ -1,9 +1,12 @@
+package view;
+
+import model.Game;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GameDisplay extends JFrame {
-
-	public static ImageLoader ImageLoader = new ImageLoader();
 
 	// Underlying game model
 	private Game game;
@@ -14,13 +17,13 @@ public class GameDisplay extends JFrame {
 	// The board
 	private BoardDisplay boardDisplay;
 
-	// Tile slider arrows
+	// model.Tile slider arrows
 	private TileSlider[] tileSliders = new TileSlider[12];
 
 	public GameDisplay() {
 		game = new Game(4);
 
-		// Properties of GameDisplay
+		// Properties of view.GameDisplay
 		setTitle("The Amazing Labyrinth");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1370, 830);
@@ -31,7 +34,10 @@ public class GameDisplay extends JFrame {
 
 		// GUI initialization
 		boardDisplay = new BoardDisplay(game.getBoard());
-		extraTileDisplay = new TileDisplay(game.getBoard().getExtraTile());
+
+		extraTileDisplay = new TileDisplay(-1, -1);
+		extraTileDisplay.update(game.getBoard().getExtraTile());
+
 		setupTileSliders();
 
 		// Properties of board GUI
@@ -41,7 +47,7 @@ public class GameDisplay extends JFrame {
 		extraTileDisplay.setSize(BoardDisplay.TILES_SIDE_LENGTH, BoardDisplay.TILES_SIDE_LENGTH);
 		extraTileDisplay.setLocation(1035, 180);
 
-		// add components to GameDisplay
+		// add components to view.GameDisplay
 		add(boardDisplay);
 		add(extraTileDisplay);
 	}
@@ -75,13 +81,6 @@ public class GameDisplay extends JFrame {
 				tileSliders[i].setLocation(100 - tileLength, 100 + (2 * order + 1) * tileLength);
 			}
 
-			// Properties
-			tileSliders[i].setSize(tileLength, tileLength);
-			tileSliders[i].setVisible(true);
-			tileSliders[i].setOpaque(false);
-			tileSliders[i].setContentAreaFilled(false);
-			tileSliders[i].setBorderPainted(false);
-
 			// Add to GUI
 			add(tileSliders[i]);
 		}
@@ -90,6 +89,12 @@ public class GameDisplay extends JFrame {
 
 	public void updateBoard(){
 		boardDisplay.updateBoard();
+	}
+
+	public void addSlideListeners(ActionListener sliderListener) {
+		for(int i = 0; i < tileSliders.length; i++) {
+			tileSliders[i].addActionListener(sliderListener);
+		}
 	}
 
 	// Getters

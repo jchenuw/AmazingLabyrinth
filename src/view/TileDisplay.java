@@ -1,3 +1,7 @@
+package view;
+
+import model.Tile;
+
 import javax.swing.*;
 import java.awt.event.ActionListener;
 

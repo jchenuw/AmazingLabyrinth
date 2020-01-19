@@ -1,5 +1,6 @@
+package view;
+
 import javax.swing.*;
-import java.awt.event.ActionListener;
 
 /**
  * This class represents the tile slider than inserts the extra tile
