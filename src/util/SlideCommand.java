@@ -1,23 +1,27 @@
 package util;
-
 import model.Board;
-import view.TileSlider;
 
-public class SlideCommand implements Command{
+import java.util.ArrayList;
+import java.util.List;
 
-	private TileSlider slider;
+public class SlideCommand implements Command {
+
+	// The only rows and columns that are shiftable
+	private static final List<Integer> SHIFTABLE_LINES = new ArrayList<Integer>(List.of(1, 3, 5));
+
 	private Board board;
+	private int orientation;
+	private int line;
 
-	public SlideCommand(Board board, TileSlider slider) {
-		this.slider = slider;
+	public SlideCommand(Board board, int orientation, int line) {
+		this.board = board;
+		this.orientation = orientation;
+		this.line = line;
 	}
 
 	@Override
 	public void execute() {
-		int line = slider.getLineResponsible();
-		int type = slider.getOrientation();
-
-		switch (type) {
+		switch (orientation) {
 			case 0 :
 				board.shiftColUp(line);
 				break;
@@ -40,10 +44,6 @@ public class SlideCommand implements Command{
 
 	@Override
 	public boolean isLegal() {
-		if(slider.isDisabled()) {
-			return false;
-		}
-
-		return true;
+		return SHIFTABLE_LINES.contains(line);
 	}
 }
