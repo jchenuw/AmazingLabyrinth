@@ -36,7 +36,7 @@ public class BoardDisplay extends JPanel {
 	private void setupTileDisplays() {
 		for(int row = 0; row < Board.TILES_PER_SIDE; row++){
 			for(int col = 0; col < Board.TILES_PER_SIDE; col++){
-				tileDisplays[row][col] = new TileDisplay(row, col);
+				tileDisplays[row][col] = new TileDisplay();
 				tileDisplays[row][col].update(board.getTiles()[row][col]);
 
 				add(tileDisplays[row][col]);

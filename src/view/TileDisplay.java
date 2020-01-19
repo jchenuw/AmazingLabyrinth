@@ -7,11 +7,11 @@ import java.awt.event.ActionListener;
 
 public class TileDisplay extends JLayeredPane{
 
-	private TileImage tileImage;
+	private JButton tileImage;
 	private JLabel treasureImage;
 
-	public TileDisplay(int row, int col) {
-		tileImage = new TileImage(row, col);
+	public TileDisplay() {
+		tileImage = new JButton();
 		treasureImage = new JLabel();
 
 		//setBorderPainted(false);
