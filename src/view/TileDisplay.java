@@ -14,7 +14,6 @@ public class TileDisplay extends JLayeredPane{
 		tileImage = new JButton();
 		treasureImage = new JLabel();
 
-		//setBorderPainted(false);
 		setVisible(true);
 		setLayout(null);
 
@@ -32,11 +31,11 @@ public class TileDisplay extends JLayeredPane{
 
 	public void update(Tile tile){
 		tileImage.setIcon(new ImageIcon(this.getClass().
-				getResource("../resource/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
+				getResource("../resources/tiles/" + tile.getType() + tile.getOrientation() + ".png")));
 
 		if(tile.hasTreasure()) {
 			treasureImage.setIcon(new ImageIcon(this.getClass().
-					getResource("../resource/treasures/" + tile.getTreasure().getTreasureNum() + ".png")));
+					getResource("../resources/treasures/" + tile.getTreasure().getTreasureNum() + ".png")));
 		} else {
 			treasureImage.setIcon(null);
 		}

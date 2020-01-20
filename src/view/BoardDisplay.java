@@ -28,6 +28,7 @@ public class BoardDisplay extends JPanel {
 		setSize(BOARD_SIDE_LENGTH, BOARD_SIDE_LENGTH);
 		setLayout(new GridLayout(7,7));
 		setVisible(true);
+		setBackground(new Color(150, 220, 220));
 
 		setupTileDisplays();
 		setupPlayerViews();
@@ -51,7 +52,7 @@ public class BoardDisplay extends JPanel {
 			Player player = players[i];
 
 			// Create new player image
-			playerViews[i] = new JLabel(new ImageIcon(getClass().getResource("resource/players/" + i + ".png")));
+			playerViews[i] = new JLabel(new ImageIcon(getClass().getResource("../resources/players/" + i + ".png")));
 
 			// Properties of playerView
 			playerViews[i].setVisible(true);
@@ -109,5 +110,10 @@ public class BoardDisplay extends JPanel {
 				tileDisplays[row][col].addMoveListener(moveListener);
 			}
 		}
+	}
+
+	// Getters
+	public TileDisplay[][] getTileDisplays() {
+		return tileDisplays;
 	}
 }
