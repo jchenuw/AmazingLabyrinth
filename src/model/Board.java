@@ -303,7 +303,7 @@ public class Board {
 		}
 
 		// Insert previous extra tile to the end of row
-		becomeBoardTile(extraTile, row, tiles.length - 1);
+		becomeBoardTile(row, tiles.length - 1);
 
 		// Reconnect tile nodes
 		disconnectTiles(row - 1, row + 1, 0, tiles.length - 1);
@@ -325,7 +325,7 @@ public class Board {
 		}
 
 		// Insert previous extra tile to the start of row
-		becomeBoardTile(extraTile, row, 0);
+		becomeBoardTile(row, 0);
 
 		// Reconnect tile nodes
 		disconnectTiles(row - 1, row + 1, 0, tiles.length - 1);
@@ -347,7 +347,7 @@ public class Board {
 		}
 
 		// Insert previous extra tile to the end of column
-		becomeBoardTile(extraTile, tiles.length - 1, col);
+		becomeBoardTile(tiles.length - 1, col);
 
 		// Reconnect tile nodes
 		disconnectTiles(0, tiles.length - 1, col - 1, col + 1);
@@ -369,7 +369,7 @@ public class Board {
 		}
 
 		// Insert previous extra tile to the start of column
-		becomeBoardTile(extraTile, 0, col);
+		becomeBoardTile(0, col);
 
 		// Reconnect tile nodes
 		disconnectTiles(0, tiles.length - 1, col - 1, col + 1);
@@ -379,6 +379,11 @@ public class Board {
 		extraTile = newExtraTile;
 	}
 
+	/**
+	 * Converts a board tile to become the extra tile
+	 *
+	 * @param tile tile to be converted
+	 */
 	private void becomeExtraTile(Tile tile) {
 		tile.setRow(-1);
 		tile.setCol(-1);
@@ -387,8 +392,14 @@ public class Board {
 		tile.removeAdjTiles();
 	}
 
-	private void becomeBoardTile(Tile extraTile, int row, int col) {
-		tiles[row][col] = extraTile;
+	/**
+	 * Converts the extra tile to a board tile
+	 *
+	 * @param row row of its new location
+ 	 * @param col col of its new location
+	 */
+	private void becomeBoardTile(int row, int col) {
+		tiles[row][col] = this.extraTile;
 		tiles[row][col].setRow(row);
 		tiles[row][col].setCol(col);
 		tiles[row][col].setExtra(false);
