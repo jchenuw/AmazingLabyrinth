@@ -26,43 +26,31 @@ public class Game {
 		public int getPlayerTurn() {
 			return this.playerTurn;
 		}
-		public void setPlayerTurn(int playerTurn) {
-			this.playerTurn = playerTurn;
-		}
-
 		public boolean hasInsertedTile() {
 			return this.insertedTile;
-		}
-		public void setInsertedTile(boolean insertedTile) {
-			this.insertedTile = insertedTile;
 		}
 
 		public boolean hasMoved() {
 			return moved;
 		}
-		public void setMoved(boolean moved) {
-			this.moved = moved;
-		}
 
 		public boolean hasGameEnd() {
 			return this.gameEnd;
 		}
-		public void setGameEnd() {
-			this.gameEnd = gameEnd;
-		}
 	}
 
-    // model.Game board
+    // Game board
     private Board board;
 
-    // model.Game cards to distribute to players
+    // Game cards to distribute to players
 	private Card[] cards;
 
     // Players of the game
 	private Player[] players;
 	private final int numPlayers;
+	private final boolean[] AI;
 
-	// Treasures
+	// Treasures on the board
 	private Treasure[] treasures;
 
 	// Extra insertable tile
@@ -75,12 +63,12 @@ public class Game {
 	 *
 	 * @param numPlayers numbers of players in the game
 	 */
-	public Game(int numPlayers) {
+	public Game(int numPlayers, boolean[] AI) {
 		this.numPlayers = numPlayers;
-
+		this.AI = AI;
 		init();
 
-		turnState = new TurnState(1, false, false);
+		turnState = new TurnState(0, false, false);
 	}
 
 	public void endGame() {
@@ -93,12 +81,38 @@ public class Game {
 	public void endTurn() {
 		turnState.playerTurn++;
 
-		if(turnState.playerTurn > players.length) {
+		if(turnState.playerTurn > players.length - 1) {
 			turnState.playerTurn = 0;
 		}
 
 		turnState.insertedTile = false;
 		turnState.moved = false;
+	}
+
+
+	public void slideExtraTileTurn(int orientation, int line) {
+		if(!turnState.insertedTile && !turnState.moved) {
+			SlideCommand slideCommand = new SlideCommand(this.board, orientation, line);
+
+			if (slideCommand.isLegal()) {
+				slideCommand.execute();
+
+				turnState.insertedTile = true;
+			}
+		}
+	}
+
+	public void movePlayerTurn(int targetRow, int targetCol) {
+		if(turnState.insertedTile && !turnState.moved) {
+			MoveCommand moveCommand = new MoveCommand(this.board, players[turnState.playerTurn], targetRow, targetCol);
+
+			if (moveCommand.isLegal()) {
+				moveCommand.execute();
+
+				turnState.moved = true;
+				endTurn();
+			}
+		}
 	}
 
 	/**
@@ -128,7 +142,12 @@ public class Game {
 		int[][] startingPoints = {{0,0}, {6, 0}, {0, 6}, {6, 6}};
 
 		for(int i = 0; i < numPlayers; i++) {
-			players[i] = new HumanPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]);
+
+			if(AI[i]) {
+				players[i] = new CPUPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]);
+			} else {
+				players[i] = new HumanPlayer(startingPoints[i][0], startingPoints[i][1], colours[i]);
+			}
 		}
 	}
 
@@ -146,8 +165,13 @@ public class Game {
 		}
 	}
 
+	/**
+	 * Shuffles and distributes 4 cards to each player
+	 */
 	private void distributeCards() {
 		Card[] shuffledCards = new Card[cards.length];
+
+		System.arraycopy(cards, 0, shuffledCards, 0, cards.length);
 
 		Random rand = new Random();
 
@@ -173,27 +197,8 @@ public class Game {
 			}
 
 			players[i].setHand(newHand);
+			System.out.println(newHand);
 		}
-	}
-
-	public void slideExtraTileTurn(int orientation, int line) {
-		SlideCommand slideCommand = new SlideCommand(this.board, orientation, line);
-
-		if(slideCommand.isLegal()) {
-			slideCommand.execute();
-		}
-
-		turnState.insertedTile = true;
-	}
-
-	public void movePlayerTurn(int targetRow, int targetCol) {
-		MoveCommand moveCommand = new MoveCommand(this.board, players[turnState.playerTurn], targetRow, targetCol);
-
-		if(moveCommand.isLegal()) {
-			moveCommand.execute();
-		}
-
-		turnState.moved = true;
 	}
 
 	// Getters
@@ -201,16 +206,12 @@ public class Game {
 		return this.board;
 	}
 
-	public Treasure[] getTreasure() {
-		return this.treasures;
-	}
-
-	public Card[] getCards() {
-		return this.cards;
-	}
-
 	public TurnState getTurnState() {
 		return this.turnState;
+	}
+
+	public int getNumPlayers() {
+		return this.numPlayers;
 	}
 
 }
