@@ -420,7 +420,11 @@ public class Board {
 		}
 	}
 
-	// Setters and getters
+	// Setters and
+	public void setTiles(Tile[][] tiles){
+		this.tiles = tiles;
+	}
+
 	public Tile[][] getTiles() {
 		return tiles;
 	}
