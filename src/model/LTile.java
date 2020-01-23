@@ -5,7 +5,8 @@ public class LTile extends Tile{
 	// Non-stationary L-tiles amount
 	public static final int TILE_AMOUNT = 16;
 
-	private static final boolean[][] openingsByOrientation = new boolean[][] {
+	// Openings for L-tiles
+	public static final boolean[][] OPENINGS_BY_ORIENTATION = new boolean[][] {
 			{true, true, false, false},
 			{false, true, true, false},
 			{false, false, true, true},
@@ -31,7 +32,7 @@ public class LTile extends Tile{
 	 */
 	@Override
 	public void updateOpenings() {
-		System.arraycopy(openingsByOrientation[this.getOrientation()], 0, openings, 0, 4);
+		System.arraycopy(OPENINGS_BY_ORIENTATION[this.getOrientation()], 0, openings, 0, 4);
 	}
 
 }

@@ -5,8 +5,8 @@ public class TTile extends Tile {
 	// Non-stationary T-tiles amount
 	public static final int TILE_AMOUNT = 6;
 
-	// openings for T-tile class
-	private static boolean[][] openingsByOrientation = new boolean[][] {
+	// Openings for T-tiles
+	public static boolean[][] OPENINGS_BY_ORIENTATION = new boolean[][] {
 			{true, true, false, true},
 			{true, true, true, false},
 			{false, true, true, true},
@@ -32,7 +32,7 @@ public class TTile extends Tile {
 	 */
 	@Override
 	public void updateOpenings() {
-		System.arraycopy(openingsByOrientation[this.getOrientation()], 0, openings, 0, 4);
+		System.arraycopy(OPENINGS_BY_ORIENTATION[this.getOrientation()], 0, openings, 0, 4);
 	}
 
 }

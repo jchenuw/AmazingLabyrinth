@@ -124,10 +124,12 @@ public abstract class Tile extends Piece {
 	public abstract void updateOpenings();
 
 	// Setters and getters
-
-
 	public ArrayList<Tile> getAdjTiles() {
 		return adjTiles;
+	}
+
+	public ArrayList<Player> getPlayersOnTile() {
+		return this.playersOnTile;
 	}
 
 	@Override
@@ -148,6 +150,11 @@ public abstract class Tile extends Piece {
 			playersOnTile.get(i).setCol(col);
 		}
 	}
+
+	public boolean[] getOpenings() {
+		return this.openings;
+	}
+
 	public boolean getOpening(int dir){
 		return(openings[dir]);
 	}
