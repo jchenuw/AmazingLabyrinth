@@ -38,6 +38,14 @@ public abstract class Player extends Piece {
 	}
 
 	/**
+	 * sets the top card of hand to this new card
+	 * @param card The card to be sent to the top of the stack
+	 */
+	public void addToHand(Card card){
+		hand.push(card);
+	}
+
+	/**
 	 * Checks if the player has won by checking if player still has cards left
 	 * @return If the player has won
 	 */
@@ -59,6 +67,16 @@ public abstract class Player extends Piece {
 	public Stack<Card> getHand() {
 		return this.hand;
 	}
+
+	/**
+	 * sets the current card and pushes the old current card to top of hand
+	 * @param card The card to be the new current card
+	 */
+	public void setCurrentCard(Card card){
+		hand.push(currentCard);
+		currentCard = card;
+	}
+
 	public Card getCurrentCard() {
 		return this.currentCard;
 	}
