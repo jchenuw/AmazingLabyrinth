@@ -12,6 +12,9 @@ The four players are in each of the corners in a randomly generated maze. The on
 
 In order to reach their objective, first the player must shift the walls of the labyrinth by pushing the extra tile into an odd row or column. This will also push another tile out, which becomes the new extra tile. You may not push an extra tile in the opposite direction of the previous . If a player is on the pushed out tile, the player is transferred to the newly inserted tile.  After shifting the maze the player may move in the maze as far as they like once. If the player lands on their objective they may look at their next objective. After it is the next player's turn. This continues until one player wins. 
 
+## Screenshots
+![main game](/src/resources/screenshots/mainGame.png)
+
 ## Authors
 Jyaer<br/>
 ronaldsin<br/>
