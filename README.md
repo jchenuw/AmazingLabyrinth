@@ -16,6 +16,6 @@ In order to reach their objective, first the player must shift the walls of the 
 ![main game](/src/resources/screenshots/mainGame.png)
 
 ## Authors
-[Jyaer](https://github.com/Jyaer) <br/>
+[Jier](https://github.com/jchenuw) <br/>
 [Ronald](https://github.com/ronaldsin) <br/>
 
