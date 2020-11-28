@@ -17,5 +17,5 @@ In order to reach their objective, first the player must shift the walls of the 
 
 ## Authors
 [Jier](https://github.com/jchenuw) <br/>
-[Ronald](https://github.com/ronaldsin) <br/>
+[Ronald Sin](https://github.com/ronaldsin) <br/>
 
