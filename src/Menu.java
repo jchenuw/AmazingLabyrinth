@@ -12,9 +12,6 @@ import javax.swing.*;
  */
 public class Menu extends JFrame implements ActionListener {
 
-	// Menu background
-	private JLabel screen = new JLabel(new ImageIcon(getClass().getResource("resources/menu/dungeon.jpg")));
-
 	// Buttons for menu options
 	private JButton startButton = new JButton();
 	private JButton[] aiButton = new JButton[4];
@@ -65,7 +62,7 @@ public class Menu extends JFrame implements ActionListener {
 			aiButton[i].setBackground(colors[i]);
 			aiButton[i].setFocusPainted(false);
 
-			screen.add(aiButton[i]);
+			this.add(aiButton[i]);
 		}
 
 		// Properties of exit button
@@ -77,12 +74,10 @@ public class Menu extends JFrame implements ActionListener {
 		exitButton.setFocusPainted(false);
 
 		// setup intro image properties
-		screen.setBounds(0, 0, 1366, 768);
+		this.setBounds(0, 0, 1366, 768);
 
-		screen.add(startButton);
-		screen.add(exitButton);
-		add(screen);
-
+		this.add(startButton);
+		this.add(exitButton);
 	}
 
 	@Override
